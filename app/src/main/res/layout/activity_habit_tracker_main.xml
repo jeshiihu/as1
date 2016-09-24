@@ -10,7 +10,35 @@
     tools:context="com.huynh.jess.jhuynh_habittracker.HabitTrackerMainActivity">
 
     <TextView
+        android:text="@string/main_title"
+        android:textSize="30sp"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView" />
+
+    <ListView
+        android:id="@+id/listView"
+
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView"
+        android:layout_above="@+id/btn_addHabit"/>
+
+    <ImageButton
+        android:id="@+id/btn_addHabit"
+        android:src="@drawable/btn_add"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+
 </RelativeLayout>
