@@ -8,18 +8,32 @@ import java.util.Date;
 
 public class Habit
 {
-    private String habitTitle;
-    private Date   habitCreationDate;
+    private String  habitTitle;
+    private String  habitCreationDate;
+    private Boolean completed;
+    private int     timesCompleted;
 
-    public Habit(String title)
+    public Habit(String title, String date)
     {
         habitTitle = title;
-        habitCreationDate = new Date(System.currentTimeMillis());
+        habitCreationDate = date;
+        completed = Boolean.FALSE;
     }
 
     @Override
     public String toString()
     {
         return habitTitle;
+    }
+
+    public void complete()
+    {
+        completed = Boolean.TRUE;
+        timesCompleted += 1;
+    }
+
+    public Boolean isCompleted()
+    {
+        return completed;
     }
 }

@@ -33,14 +33,19 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
     private ArrayAdapter<Habit> adapter;
 
+    private Habit selectedHabit;
+    private int   selectedIndex;
+
+    private int counter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_tracker_main);
 
-        ImageButton addButton = (ImageButton) findViewById(R.id.btn_addHabit);
-        oldHabitList = (ListView) findViewById(R.id.oldHabitView);
+        ImageButton addButton = (ImageButton)findViewById(R.id.btn_addHabit);
+        oldHabitList = (ListView)findViewById(R.id.oldHabitView);
 
         addButton.setOnClickListener(new View.OnClickListener()
         {
@@ -50,14 +55,28 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
 
                 // start new activity to create the habit
-                Intent intent = new Intent(HabitTrackerMainActivity.this , HabitTrackerCreatorActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(HabitTrackerMainActivity.this , HabitTrackerCreatorActivity.class);
+//                startActivity(intent);
 
-//                Habit newHabit = new Habit("test");
-//                habitList.add(newHabit);
-//                adapter.notifyDataSetChanged();
-//                saveInFile();
+                String name = String.format("test" + counter);
+                counter += 1;
+
+                Habit newHabit = new Habit(name, "2016-09-25");
+                habitList.add(newHabit);
+                adapter.notifyDataSetChanged();
+                saveInFile();
                 // TODO bring up habit editor view
+            }
+        });
+
+        ImageButton deleteButton = (ImageButton)findViewById(R.id.btn_deleteHabit);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int currSelectHabit = oldHabitList.getSelectedItegitmPosition();
+                habitList.remove(currSelectHabit);
+                adapter.notifyDataSetChanged();
+                saveInFile();
             }
         });
     }
