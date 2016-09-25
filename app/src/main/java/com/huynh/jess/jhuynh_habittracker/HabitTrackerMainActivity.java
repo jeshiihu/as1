@@ -5,6 +5,7 @@
 
 package com.huynh.jess.jhuynh_habittracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -48,10 +49,14 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
             {
                 setResult(RESULT_OK);
 
-                Habit newHabit = new Habit("test");
-                habitList.add(newHabit);
-                adapter.notifyDataSetChanged();
-                saveInFile();
+                // start new activity to create the habit
+                Intent intent = new Intent(HabitTrackerMainActivity.this , HabitTrackerCreatorActivity.class);
+                startActivity(intent);
+
+//                Habit newHabit = new Habit("test");
+//                habitList.add(newHabit);
+//                adapter.notifyDataSetChanged();
+//                saveInFile();
                 // TODO bring up habit editor view
             }
         });

@@ -10,13 +10,13 @@
     tools:context="com.huynh.jess.jhuynh_habittracker.HabitTrackerMainActivity">
 
     <TextView
+        android:id="@+id/textView_mainTitle"
         android:text="@string/main_title"
         android:textSize="30sp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView" />
+        android:layout_centerHorizontal="true" />
 
     <ListView
         android:id="@+id/oldHabitView"
@@ -27,7 +27,8 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/textView"
-        android:layout_above="@+id/btn_addHabit"/>
+        android:layout_above="@+id/btn_addHabit"
+        android:scrollbars="vertical"/>
 
     <ImageButton
         android:id="@+id/btn_addHabit"
