@@ -47,10 +47,32 @@
 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView_habitTitle"
+        android:layout_below="@+id/textView_habitTitle"
+        android:layout_alignParentLeft="true"
 
-        android:maxLines="1"/>
+        android:maxLines="1" />
     <!--HABIT TITLE-->
+
+    <!--DATE-->
+    <TextView
+        android:id="@+id/textView_creatorDateTitle"
+        android:text="@string/creation_date"
+        android:textSize="20sp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_habitTitle"
+        android:layout_alignParentLeft="true" />
+
+    <EditText
+        android:id="@+id/editText_date"
+        android:textSize="18sp"
+        android:inputType="number"
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_creatorDateTitle"/>
+    <!--DATE-->
 
     <!--REPEAT ON DAYS-->
     <TextView
@@ -61,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/editText_habitTitle"/>
+        android:layout_below="@id/editText_date"/>
 
     <Button
         android:id="@+id/btn_wednesday"
@@ -176,6 +198,7 @@
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@id/btn_creatorCancel"
         android:layout_marginRight="10dp"/>
+
     <!--ADD AND CANCEL BUTTONS-->
 
 </RelativeLayout>
