@@ -54,6 +54,13 @@ public class DaysSetTest
     }
 
     @Test
+    public void removeEmpty() throws Exception
+    {
+        DaysSet days = new DaysSet();
+        days.removeDay(DaysSet.Day.Fri); // make sure no exception thrown
+    }
+
+    @Test
     public void removeDaySingle() throws Exception
     {
         DaysSet days = new DaysSet();
@@ -63,5 +70,19 @@ public class DaysSetTest
 
         days.removeDay(DaysSet.Day.Fri);
         assert(days.size() == 0);
+    }
+
+    @Test
+    public void removeDayMultiple() throws Exception
+    {
+        DaysSet days = new DaysSet();
+        days.addDay(DaysSet.Day.Fri);
+        days.addDay(DaysSet.Day.Sun);
+        days.addDay(DaysSet.Day.Wed);
+
+        assert(days.size() == 3);
+
+        days.removeDay(DaysSet.Day.Sun);
+        assert(days.size() == 2);
     }
 }

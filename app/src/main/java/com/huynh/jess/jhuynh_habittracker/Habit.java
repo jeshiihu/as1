@@ -18,14 +18,9 @@ import java.util.regex.Pattern;
 
 public class Habit implements Serializable
 {
-    public enum Days
-    {
-        sunday, monday, tuesday, wednesday, thursday, friday, saturday
-    }
-
     private String  habitTitle;
     private String  habitCreationDate;
-    private Set<Days> setOfDays;
+    private DaysSet setOfDays;
 
     public Habit()
     {
@@ -69,20 +64,13 @@ public class Habit implements Serializable
         return this.habitCreationDate;
     }
 
-
-    public void complete()
+    public void setDays(DaysSet days)
     {
+        this.setOfDays = days;
     }
 
-    public Boolean isDaySelected(Days day)
+    public DaysSet getDays()
     {
-        if(setOfDays.contains(day))
-        {
-            return Boolean.TRUE;
-        }
-        else
-        {
-            return Boolean.FALSE;
-        }
+        return this.setOfDays;
     }
 }

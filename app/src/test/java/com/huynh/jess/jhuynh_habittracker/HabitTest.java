@@ -12,6 +12,17 @@ import static org.junit.Assert.*;
  * To work on unit tests, switch the Test Artifact in the Build Variants view.
  */
 public class HabitTest {
+
+    private DaysSet createDays()
+    {
+        DaysSet days = new DaysSet();
+        days.addDay(DaysSet.Day.Mon);
+        days.addDay(DaysSet.Day.Wed);
+        days.addDay(DaysSet.Day.Thu);
+
+        return days;
+    }
+
     @Test
     public void getTitleEmpty() throws Exception
     {
@@ -55,7 +66,13 @@ public class HabitTest {
     public void setDays() throws Exception
     {
         Habit habit = new Habit();
+        habit.setDays(createDays());
 
-//        habit.setDays();
+        DaysSet days = habit.getDays();
+
+        assert(days.size() == 3);
+        assert(days.isDayContained(DaysSet.Day.Mon));
+        assert(days.isDayContained(DaysSet.Day.Wed));
+        assert(days.isDayContained(DaysSet.Day.Thu));
     }
 }
