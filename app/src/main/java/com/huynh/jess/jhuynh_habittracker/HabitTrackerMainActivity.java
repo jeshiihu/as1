@@ -33,7 +33,6 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
 
     public final static int REQ_CODE_CREATOR = 1;
 
-
     private static final String FILENAME = "file.sav";
     private ListView oldHabitList;
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
@@ -68,32 +67,13 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
                 startActivityForResult(intentCreator, REQ_CODE_CREATOR);
             }
         });
-
-        ImageButton deleteButton = (ImageButton)findViewById(R.id.btn_deleteHabit);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int currSelectHabit = oldHabitList.getSelectedItemPosition();
-                habitList.remove(currSelectHabit);
-                adapter.notifyDataSetChanged();
-                saveInFile();
-            }
-        });
-
-//        oldHabitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-//            {
-//                Intent intent = new Intent(HabitTrackerMainActivity.this, );
-//                startActivity(intent);
-//            }
-//        });
     }
 
     @Override
     protected void onStart()
     {
         super.onStart();
+        loadFromFile();
         adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, habitList);
         oldHabitList.setAdapter(adapter);
     }
