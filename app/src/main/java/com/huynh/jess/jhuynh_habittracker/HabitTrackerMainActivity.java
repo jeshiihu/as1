@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -25,8 +26,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
+
 
 public class HabitTrackerMainActivity extends AppCompatActivity {
+
+    public final static int REQ_CODE_CREATOR = 1;
+
 
     private static final String FILENAME = "file.sav";
     private ListView oldHabitList;
@@ -54,18 +60,12 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
             {
                 setResult(RESULT_OK);
 
-                // start new activity to create the habit
-//                Intent intent = new Intent(HabitTrackerMainActivity.this , HabitTrackerCreatorActivity.class);
-//                startActivity(intent);
+                //start new activity to create the habit
+                Date currDate = new Date(System.currentTimeMillis());
+                Habit newHabit = new Habit(habitList.size(), "", currDate);
 
-                String name = String.format("test" + counter);
-                counter += 1;
-
-                Habit newHabit = new Habit(name, "2016-09-25");
-                habitList.add(newHabit);
-                adapter.notifyDataSetChanged();
-                saveInFile();
-                // TODO bring up habit editor view
+                Intent intentCreator = new Intent(HabitTrackerMainActivity.this , HabitTrackerCreatorActivity.class);
+                startActivityForResult(intentCreator, REQ_CODE_CREATOR);
             }
         });
 
@@ -73,12 +73,21 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int currSelectHabit = oldHabitList.getSelectedItegitmPosition();
+                int currSelectHabit = oldHabitList.getSelectedItemPosition();
                 habitList.remove(currSelectHabit);
                 adapter.notifyDataSetChanged();
                 saveInFile();
             }
         });
+
+//        oldHabitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+//            {
+//                Intent intent = new Intent(HabitTrackerMainActivity.this, );
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -135,6 +144,25 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
         {
             // TODO Auto-generated catch block
             throw new RuntimeException();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if(requestCode == REQ_CODE_CREATOR)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                Habit newHabit = (Habit) data.getExtras().getSerializable("newHabit");
+                habitList.add(newHabit);
+                adapter.notifyDataSetChanged();
+                saveInFile();
+            }
+            else if(resultCode == RESULT_CANCELED)
+            {
+                // do nothing
+            }
         }
     }
 }

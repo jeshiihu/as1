@@ -28,13 +28,10 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_tracker_creator);
 
-        Intent intent = getIntent();
-        ViewGroup layout = (ViewGroup)findViewById(R.id.activity_habit_tracker_creator);
-
         // Get current date
-        Date currDate = new Date(System.currentTimeMillis());
+        final Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        editStrDate = format.format(currDate);
+        editStrDate = format.format(date);
 
         // auto fill the date edit text
         EditText editDate = (EditText)findViewById(R.id.editText_date);
@@ -57,16 +54,22 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
             }
         });
 
-        Button addButton = (Button)findViewById(R.id.btn_creatorOK);
-        addButton.setOnClickListener(new View.OnClickListener()
+        Button addBtn = (Button)findViewById(R.id.btn_creatorOK);
+        addBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View view)
+            public void onClick(View v)
             {
-                EditText habitTitle = (EditText)findViewById(R.id.editText_habitTitle);
-                if(habitTitle.getText().length() != 0)
+                EditText editTitle = (EditText)findViewById(R.id.editText_habitTitle);
+                String sTitle = editTitle.getText().toString();
+                if(sTitle != "")
                 {
+                    Habit newHabit = new Habit(1, sTitle, date);
 
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("newHabit", newHabit);
+                    setResult(RESULT_OK, returnIntent);
+                    finish();
                 }
             }
         });
