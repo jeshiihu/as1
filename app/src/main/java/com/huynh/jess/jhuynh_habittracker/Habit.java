@@ -1,7 +1,9 @@
 package com.huynh.jess.jhuynh_habittracker;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by Jess on 2016-09-24.
@@ -13,11 +15,17 @@ import java.util.Date;
 
 public class Habit implements Serializable
 {
+    public enum Days
+    {
+        sunday, monday, tuesday, wednesday, thursday, friday, saturday
+    }
+
     private double  habitId;
     private String  habitTitle;
-    private Date  habitCreationDate;
+    private Date    habitCreationDate;
     private Boolean completed;
     private int     timesCompleted;
+    private Set<Days> setOfDays;
 
     public Habit(double id, String title, Date date)
     {
@@ -53,7 +61,6 @@ public class Habit implements Serializable
         return this.timesCompleted;
     }
 
-
     public void complete()
     {
         this.completed = Boolean.TRUE;
@@ -63,5 +70,17 @@ public class Habit implements Serializable
     public Boolean isCompleted()
     {
         return this.completed;
+    }
+
+    public Boolean isDaySelected(Days day)
+    {
+        if(setOfDays.contains(day))
+        {
+            return Boolean.TRUE;
+        }
+        else
+        {
+            return Boolean.FALSE;
+        }
     }
 }

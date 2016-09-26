@@ -20,6 +20,7 @@ import java.util.Date;
 
 public class HabitTrackerCreatorActivity extends AppCompatActivity
 {
+    private Habit newHabit;
     private String editStrDate;
 
     @Override
@@ -82,6 +83,17 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
             {
                 setResult(RESULT_CANCELED);
                 finish();
+            }
+        });
+
+        final Button mondayBtn = (Button)findViewById(R.id.btn_monday);
+        mondayBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+//                if(isDaySelected())
+//                daySelected();
             }
         });
     }
