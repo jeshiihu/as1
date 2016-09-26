@@ -67,6 +67,14 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
                 startActivityForResult(intentCreator, REQ_CODE_CREATOR);
             }
         });
+
+        oldHabitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent editIntent = new Intent(HabitTrackerMainActivity.this , HabitTrackerEditActivity.class);
+                startActivity(editIntent);
+            }
+        });
     }
 
     @Override
@@ -94,12 +102,10 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
         }
         catch (FileNotFoundException e)
         {
-            // TODO Auto-generated catch block
             throw new RuntimeException();
         }
         catch (IOException e)
         {
-            // TODO Auto-generated catch block
             throw new RuntimeException();
         }
     }
@@ -117,12 +123,10 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
         }
         catch (FileNotFoundException e)
         {
-            // TODO Auto-generated catch block
             throw new RuntimeException();
         }
         catch (IOException e)
         {
-            // TODO Auto-generated catch block
             throw new RuntimeException();
         }
     }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_habit_tracker_creator">
+
+    <TextView
+        android:id="@+id/textView_immutableTitle"
+        android:text="TODO put title here"
+        android:textSize="25dp"
+
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView_immutableDate"
+        android:text="TODO put date here"
+        android:textSize="20dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_immutableTitle"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/textView_immutableRepeatTitle"
+        android:text="@string/repeat_days"
+        android:textSize="20dp"
+
+        android:layout_below="@id/textView_immutableDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/textView_immutableRepeatDays"
+        android:text="TODO: Sat, Mon, Tue, Wed, Thu, Fri, Sat"
+        android:textSize="18dp"
+
+        android:layout_below="@id/textView_immutableRepeatTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"/>
+
+    <ImageButton
+        android:id="@+id/btn_deleteHabit"
+        android:src="@drawable/btn_trash"
+        android:background="@android:color/transparent"
+
+        android:scaleType="fitCenter"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"/>
+
+    <Button
+        android:id="@+id/btn_ViewHabitHistory"
+        android:text="@string/view_history"
+        android:background="@color/teal"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+
+        android:layout_toLeftOf="@id/btn_deleteHabit"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <ImageButton
+        android:id="@+id/btn_completeHabit"
+        android:src="@drawable/btn_complete"
+        android:background="@android:color/transparent"
+
+        android:scaleType="fitCenter"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_toLeftOf="@id/btn_ViewHabitHistory"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"/>
+
+</RelativeLayout>

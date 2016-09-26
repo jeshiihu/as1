@@ -21,4 +21,6 @@
     <string name="friday">Fri</string>
     <string name="saturday">Sat</string>
 
+    <string name="view_history">View History</string>
+
 </resources>
