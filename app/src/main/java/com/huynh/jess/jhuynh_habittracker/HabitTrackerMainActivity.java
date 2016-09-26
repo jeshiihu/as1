@@ -32,6 +32,7 @@ import java.util.Date;
 public class HabitTrackerMainActivity extends AppCompatActivity {
 
     public final static int REQ_CODE_CREATOR = 1;
+    public final static int REQ_CODE_EDITOR = 2;
 
     private static final String FILENAME = "file.sav";
     private ListView oldHabitList;
@@ -71,8 +72,9 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
         oldHabitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedIndex = i;
                 Intent editIntent = new Intent(HabitTrackerMainActivity.this , HabitTrackerEditActivity.class);
-                startActivity(editIntent);
+                startActivityForResult(editIntent, REQ_CODE_EDITOR);
             }
         });
     }
@@ -146,6 +148,20 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
             else if(resultCode == RESULT_CANCELED)
             {
                 // do nothing
+            }
+        }
+
+        if(requestCode == REQ_CODE_EDITOR)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                String action = data.getExtras().getString("actionType");
+                if(action.equals("delete"))
+                {
+                    habitList.remove(selectedIndex);
+                    adapter.notifyDataSetChanged();
+                    saveInFile();
+                }
             }
         }
     }

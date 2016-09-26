@@ -62,7 +62,7 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
             {
                 EditText editTitle = (EditText)findViewById(R.id.editText_habitTitle);
                 String sTitle = editTitle.getText().toString();
-                if(sTitle != "")
+                if(sTitle.length() != 0)
                 {
                     Habit newHabit = new Habit(1, sTitle, date);
 
@@ -71,6 +71,17 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
                     setResult(RESULT_OK, returnIntent);
                     finish();
                 }
+            }
+        });
+
+        Button cancelBtn = (Button)findViewById(R.id.btn_creatorCancel);
+        cancelBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                setResult(RESULT_CANCELED);
+                finish();
             }
         });
     }
