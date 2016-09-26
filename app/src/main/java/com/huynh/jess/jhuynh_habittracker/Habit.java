@@ -1,9 +1,12 @@
 package com.huynh.jess.jhuynh_habittracker;
 
+import android.nfc.FormatException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * Created by Jess on 2016-09-24.
@@ -20,19 +23,19 @@ public class Habit implements Serializable
         sunday, monday, tuesday, wednesday, thursday, friday, saturday
     }
 
-    private double  habitId;
     private String  habitTitle;
-    private Date    habitCreationDate;
-    private Boolean completed;
-    private int     timesCompleted;
+    private String  habitCreationDate;
     private Set<Days> setOfDays;
 
-    public Habit(double id, String title, Date date)
+    public Habit()
     {
-        this.habitId = id;
+        this.habitTitle = "";
+    }
+
+    public Habit(String title, String date)
+    {
         this.habitTitle = title;
         this.habitCreationDate = date;
-        this.completed = Boolean.FALSE;
     }
 
     @Override
@@ -41,35 +44,34 @@ public class Habit implements Serializable
         return habitTitle;
     }
 
-    public double GetId()
+    public void setTitle(String title)
     {
-        return this.habitId;
+        this.habitTitle = title;
     }
 
-    public String GetTitle()
+    public String getTitle()
     {
         return this.habitTitle;
     }
 
-    public Date GetDate()
+    public void setDate(String date) throws Exception
+    {
+        if(!date.matches("\\d{4}-\\d{2}-\\d{2}"))
+        {
+            throw new FormatException();
+        }
+
+        this.habitCreationDate = date;
+    }
+
+    public String getDate()
     {
         return this.habitCreationDate;
     }
 
-    public int GetTimesCompleted()
-    {
-        return this.timesCompleted;
-    }
 
     public void complete()
     {
-        this.completed = Boolean.TRUE;
-        this.timesCompleted += 1;
-    }
-
-    public Boolean isCompleted()
-    {
-        return this.completed;
     }
 
     public Boolean isDaySelected(Days day)

@@ -62,7 +62,7 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
 
                 //start new activity to create the habit
                 Date currDate = new Date(System.currentTimeMillis());
-                Habit newHabit = new Habit(habitList.size(), "", currDate);
+                Habit newHabit = new Habit("", currDate.toString());
 
                 Intent intentCreator = new Intent(HabitTrackerMainActivity.this , HabitTrackerCreatorActivity.class);
                 startActivityForResult(intentCreator, REQ_CODE_CREATOR);

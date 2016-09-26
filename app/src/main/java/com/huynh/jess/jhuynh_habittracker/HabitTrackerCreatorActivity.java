@@ -65,7 +65,7 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
                 String sTitle = editTitle.getText().toString();
                 if(sTitle.length() != 0)
                 {
-                    Habit newHabit = new Habit(1, sTitle, date);
+                    Habit newHabit = new Habit(sTitle, date.toString());
 
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("newHabit", newHabit);
