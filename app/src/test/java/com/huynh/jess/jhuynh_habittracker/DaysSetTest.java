@@ -21,54 +21,54 @@ public class DaysSetTest
     public void addDaySingle() throws Exception
     {
         DaysSet days = new DaysSet();
-        days.addDay(DaysSet.Day.Fri);
-        assertTrue(days.isDayContained(DaysSet.Day.Fri));
+        days.addDay(DaysSet.Day.Friday);
+        assertTrue(days.isDayContained(DaysSet.Day.Friday));
     }
 
     @Test
     public void addDaySingleInvalid() throws Exception
     {
         DaysSet days = new DaysSet();
-        days.addDay(DaysSet.Day.Fri);
-        assertFalse(days.isDayContained(DaysSet.Day.Tue));
+        days.addDay(DaysSet.Day.Friday);
+        assertFalse(days.isDayContained(DaysSet.Day.Tuesday));
     }
 
     @Test
     public void addDayMultiple() throws Exception
     {
         DaysSet days = new DaysSet();
-        days.addDay(DaysSet.Day.Fri);
-        days.addDay(DaysSet.Day.Sun);
-        days.addDay(DaysSet.Day.Wed);
-        assertTrue(days.isDayContained(DaysSet.Day.Sun));
+        days.addDay(DaysSet.Day.Friday);
+        days.addDay(DaysSet.Day.Sunday);
+        days.addDay(DaysSet.Day.Wednesday);
+        assertTrue(days.isDayContained(DaysSet.Day.Sunday));
     }
 
     @Test
     public void addDayMultipleInvalid() throws Exception
     {
         DaysSet days = new DaysSet();
-        days.addDay(DaysSet.Day.Fri);
-        days.addDay(DaysSet.Day.Sun);
-        days.addDay(DaysSet.Day.Wed);
-        assertFalse(days.isDayContained(DaysSet.Day.Sat));
+        days.addDay(DaysSet.Day.Friday);
+        days.addDay(DaysSet.Day.Sunday);
+        days.addDay(DaysSet.Day.Wednesday);
+        assertFalse(days.isDayContained(DaysSet.Day.Saturday));
     }
 
     @Test
     public void removeEmpty() throws Exception
     {
         DaysSet days = new DaysSet();
-        days.removeDay(DaysSet.Day.Fri); // make sure no exception thrown
+        days.removeDay(DaysSet.Day.Friday); // make sure no exception thrown
     }
 
     @Test
     public void removeDaySingle() throws Exception
     {
         DaysSet days = new DaysSet();
-        days.addDay(DaysSet.Day.Fri);
+        days.addDay(DaysSet.Day.Friday);
 
         assert(days.size() == 1);
 
-        days.removeDay(DaysSet.Day.Fri);
+        days.removeDay(DaysSet.Day.Friday);
         assert(days.size() == 0);
     }
 
@@ -76,13 +76,22 @@ public class DaysSetTest
     public void removeDayMultiple() throws Exception
     {
         DaysSet days = new DaysSet();
-        days.addDay(DaysSet.Day.Fri);
-        days.addDay(DaysSet.Day.Sun);
-        days.addDay(DaysSet.Day.Wed);
+        days.addDay(DaysSet.Day.Friday);
+        days.addDay(DaysSet.Day.Sunday);
+        days.addDay(DaysSet.Day.Wednesday);
 
         assert(days.size() == 3);
 
-        days.removeDay(DaysSet.Day.Sun);
+        days.removeDay(DaysSet.Day.Sunday);
         assert(days.size() == 2);
+    }
+
+    @Test
+    public void setCurrentDay() throws Exception
+    {
+        DaysSet days = new DaysSet();
+        days.setCurrentDay(DaysSet.Day.Friday);
+
+        assertSame(days.getCurrentDay(), DaysSet.Day.Friday);
     }
 }

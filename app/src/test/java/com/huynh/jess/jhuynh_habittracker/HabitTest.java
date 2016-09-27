@@ -13,9 +13,9 @@ public class HabitTest {
     private DaysSet createDays()
     {
         DaysSet days = new DaysSet();
-        days.addDay(DaysSet.Day.Mon);
-        days.addDay(DaysSet.Day.Wed);
-        days.addDay(DaysSet.Day.Thu);
+        days.addDay(DaysSet.Day.Monday);
+        days.addDay(DaysSet.Day.Wednesday);
+        days.addDay(DaysSet.Day.Thursday);
 
         return days;
     }
@@ -68,8 +68,8 @@ public class HabitTest {
         DaysSet days = habit.getDays();
 
         assert(days.size() == 3);
-        assert(days.isDayContained(DaysSet.Day.Mon));
-        assert(days.isDayContained(DaysSet.Day.Wed));
-        assert(days.isDayContained(DaysSet.Day.Thu));
+        assert(days.isDayContained(DaysSet.Day.Monday));
+        assert(days.isDayContained(DaysSet.Day.Wednesday));
+        assert(days.isDayContained(DaysSet.Day.Thursday));
     }
 }

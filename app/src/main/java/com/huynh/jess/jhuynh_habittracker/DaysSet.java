@@ -11,10 +11,11 @@ public class DaysSet
 {
     public enum Day
     {
-        Sun, Mon, Tue, Wed, Thu, Fri, Sat
+        Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
     }
 
     private Set<Day> days;
+    private Day      currentDayOfWeek;
 
     public DaysSet()
     {
@@ -39,5 +40,22 @@ public class DaysSet
     public int size()
     {
         return days.size();
+    }
+
+    public void setCurrentDay(Day day)
+    {
+        this.currentDayOfWeek = day;
+    }
+
+    public Day getCurrentDay() throws Exception
+    {
+        if(this.currentDayOfWeek.equals(""))
+        {
+            throw new RuntimeException();
+        }
+        else
+        {
+            return this.currentDayOfWeek;
+        }
     }
 }

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,6 +27,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -46,6 +48,10 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_tracker_daily);
+
+        TextView textCurrentDay = (TextView)findViewById(R.id.textView_mainTitle);
+        Date dayOfWeek = new Date(Calendar.DAY_OF_WEEK);
+        textCurrentDay.setText(dayOfWeek.toString());
 
         ImageButton addButton = (ImageButton)findViewById(R.id.btn_addHabit);
         oldHabitList = (ListView)findViewById(R.id.oldHabitView);
