@@ -21,4 +21,20 @@ public class HabitListController {
     public int size() {
         return this.habitsList.size();
     }
+
+    public Habit getHabit(int index) {
+        try {
+            return habitsList.get(index);
+        } catch(IndexOutOfBoundsException exception){
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    public void removeHabit(int index){
+        try {
+            this.habitsList.remove(index);
+        } catch (IndexOutOfBoundsException exception) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
 }
