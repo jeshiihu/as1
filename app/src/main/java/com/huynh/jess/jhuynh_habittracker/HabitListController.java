@@ -9,9 +9,15 @@ import java.util.ArrayList;
 public class HabitListController {
     private ArrayList<Habit> habitsList;
 
+
     public HabitListController()
     {
         habitsList = new ArrayList<Habit>();
+    }
+
+    public ArrayList<Habit> getArray()
+    {
+        return this.habitsList;
     }
 
     public void addHabit(Habit habit) {
@@ -36,5 +42,9 @@ public class HabitListController {
         } catch (IndexOutOfBoundsException exception) {
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    public void reset() {
+        this.habitsList = new ArrayList<Habit>();
     }
 }

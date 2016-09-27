@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class HabitTrackerMainActivity extends AppCompatActivity {
+public class HabitTrackerDailyActivity extends AppCompatActivity {
 
     public final static int REQ_CODE_CREATOR = 1;
     public final static int REQ_CODE_EDITOR = 2;
@@ -39,16 +39,13 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
     private ArrayAdapter<Habit> adapter;
 
-    private Habit selectedHabit;
     private int   selectedIndex;
-
-    private int counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_habit_tracker_main);
+        setContentView(R.layout.activity_habit_tracker_daily);
 
         ImageButton addButton = (ImageButton)findViewById(R.id.btn_addHabit);
         oldHabitList = (ListView)findViewById(R.id.oldHabitView);
@@ -64,7 +61,7 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
                 Date currDate = new Date(System.currentTimeMillis());
                 Habit newHabit = new Habit("", currDate.toString());
 
-                Intent intentCreator = new Intent(HabitTrackerMainActivity.this , HabitTrackerCreatorActivity.class);
+                Intent intentCreator = new Intent(HabitTrackerDailyActivity.this , HabitTrackerCreatorActivity.class);
                 startActivityForResult(intentCreator, REQ_CODE_CREATOR);
             }
         });
@@ -73,7 +70,7 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedIndex = i;
-                Intent editIntent = new Intent(HabitTrackerMainActivity.this , HabitTrackerEditActivity.class);
+                Intent editIntent = new Intent(HabitTrackerDailyActivity.this , HabitTrackerEditActivity.class);
                 startActivityForResult(editIntent, REQ_CODE_EDITOR);
             }
         });

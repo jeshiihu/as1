@@ -145,4 +145,18 @@ public class HabitListControllerTest {
 
         assertSame(habitControl.getHabit(0).getTitle(), "Run 20km");
     }
+
+    @Test
+    public void reset()
+    {
+        HabitListController habitControl = new HabitListController();
+        Habit habit0 = habitFactory("Cook dinner");
+        habitControl.addHabit(habit0);
+
+        Habit habit1 = habitFactory("Run 20km");
+        habitControl.addHabit(habit1);
+
+        habitControl.reset();
+        assert(habitControl.size() == 0);
+    }
 }
