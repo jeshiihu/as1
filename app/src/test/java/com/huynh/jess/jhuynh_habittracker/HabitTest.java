@@ -4,10 +4,6 @@ import android.nfc.FormatException;
 
 import org.junit.Test;
 
-import java.util.jar.JarEntry;
-
-import static org.junit.Assert.*;
-
 /**
  * To work on unit tests, switch the Test Artifact in the Build Variants view.
  */
