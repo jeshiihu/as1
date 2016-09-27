@@ -90,7 +90,6 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
 
     private void loadFromFile()
     {
-        ArrayList<String> habits = new ArrayList<String>();
         try
         {
             FileInputStream fis = openFileInput(FILENAME);
@@ -104,7 +103,7 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
         }
         catch (FileNotFoundException e)
         {
-            throw new RuntimeException();
+            habitList = new ArrayList<Habit>();
         }
         catch (IOException e)
         {
