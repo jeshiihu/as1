@@ -1,6 +1,8 @@
-# as1
+# as1: Assignment 1 for CMPUT 301
+Application that is a habit tracker/task tracker, letting a user add, complete, delete, and view histories of their habits/tasks!
 
 Sources:
+--------------------------------------------------------------
 
 Github
 --------------------------------------------------------------
