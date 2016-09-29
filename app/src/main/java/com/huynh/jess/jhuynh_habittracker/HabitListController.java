@@ -21,7 +21,6 @@ public class HabitListController {
         habitsList.addHabit(habit);
     }
 
-
     public void addMultipleHabits(HabitList loadedList) {
         if(loadedList.getHabits() == null)
             return;
@@ -29,18 +28,6 @@ public class HabitListController {
         for(Habit h : loadedList.getHabits())
         {
             habitsList.addHabit(h);
-        }
-    }
-
-    public int size() {
-        return this.habitsList.size();
-    }
-
-    public Habit getHabit(int index) {
-        try {
-            return habitsList.getHabit(index);
-        } catch(IndexOutOfBoundsException exception){
-            throw new IndexOutOfBoundsException();
         }
     }
 

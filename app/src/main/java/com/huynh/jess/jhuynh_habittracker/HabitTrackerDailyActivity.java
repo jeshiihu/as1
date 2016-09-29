@@ -153,7 +153,7 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK)
             {
                 Habit newHabit = (Habit) data.getExtras().getSerializable("newHabit");
-                habitCtrl.getHabitList().addHabit(newHabit);
+                habitCtrl.addHabit(newHabit);
             }
             else if(resultCode == RESULT_CANCELED)
             {

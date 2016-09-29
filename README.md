@@ -17,7 +17,3 @@ Sept. 24, 2016: Getting string for day of the week, formating string to yyyy-dd-
 	Answer by User: JDeveloper, http://stackoverflow.com/users/1503849/jdeveloper <br />
 	Edited by User: Joel Christophel, http://stackoverflow.com/users/1713149/joel-christophel <br />
 	Question: http://stackoverflow.com/questions/5270272/how-to-determine-day-of-week-by-passing-specific-date <br />
-
-Sept. 26, 2016: Catch event when you edit an EditText element
-	Answer by User: Kanth, http://stackoverflow.com/users/1592160/kanth
-	Question: http://stackoverflow.com/questions/18305520/edittext-custom-string-formatting
