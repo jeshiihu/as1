@@ -1,7 +1,4 @@
 
-// Code taken and referenced from: Alex Makepeace
-// CMPUT 301 Lab 3 Thursday 22, 2016
-// https://github.com/sensible-heart/lonelyTwitter/blob/master/app/src/main/java/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java
 
 package com.huynh.jess.jhuynh_habittracker;
 
@@ -26,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,8 +48,9 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_habit_tracker_daily);
 
         TextView textCurrentDay = (TextView)findViewById(R.id.textView_mainTitle);
-        Date dayOfWeek = new Date(Calendar.DAY_OF_WEEK);
-        textCurrentDay.setText(dayOfWeek.toString());
+        Date dayOfWeek = new Date(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat("EEEE");
+        textCurrentDay.setText(format.format(dayOfWeek));
 
         ImageButton addButton = (ImageButton)findViewById(R.id.btn_addHabit);
         oldHabitList = (ListView)findViewById(R.id.oldHabitView);
