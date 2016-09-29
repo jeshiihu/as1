@@ -1,16 +1,5 @@
 package com.huynh.jess.jhuynh_habittracker;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-
-import static android.provider.Telephony.Mms.Part.FILENAME;
-
 /**
  * Created by Jess on 2016-09-26.
  */
@@ -34,6 +23,9 @@ public class HabitListController {
 
 
     public void addMultipleHabits(HabitList loadedList) {
+        if(loadedList.getHabits() == null)
+            return;
+
         for(Habit h : loadedList.getHabits())
         {
             habitsList.addHabit(h);

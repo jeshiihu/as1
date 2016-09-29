@@ -3,15 +3,9 @@ package com.huynh.jess.jhuynh_habittracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -21,7 +15,6 @@ import java.util.Date;
 public class HabitTrackerCreatorActivity extends AppCompatActivity
 {
     private Habit newHabit;
-    private String editStrDate;
     private DaysSet days = new DaysSet();
 
     @Override
@@ -30,63 +23,17 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_tracker_creator);
 
-        // Get current date
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        editStrDate = format.format(date);
-
-        // auto fill the date edit text
+        // Get current date & auto fill the date edit text
         EditText editDate = (EditText)findViewById(R.id.editText_date);
-        editDate.setText(editStrDate);
-
-        editDate.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        Button cancelBtn = (Button)findViewById(R.id.btn_creatorCancel);
-        cancelBtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setResult(RESULT_CANCELED);
-                finish();
-            }
-        });
-
-        days = new DaysSet();
-        final Button mondayBtn = (Button)findViewById(R.id.btn_monday);
-        mondayBtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                if(!days.isDayContained(DaysSet.Day.Monday)) {
-                    days.addDay(DaysSet.Day.Monday);
-                }
-                else { // unselecting day
-                    days.removeDay(DaysSet.Day.Monday);
-                }
-            }
-        });
+        days.setCurrentDate(new Date(System.currentTimeMillis()));
+        editDate.setText(days.getCurrentDateStr("yyyy-MM-dd"));
     }
 
-    public void addHabit(View view) {
+    // -------------- Buttton Click events --------------
+    public void onBtnClickAddCreator(View view) {
         EditText editTitle = (EditText)findViewById(R.id.editText_habitTitle);
         String sTitle = editTitle.getText().toString();
+
         if(sTitle.length() != 0)
         {
             Date date = new Date(System.currentTimeMillis());
@@ -97,5 +44,38 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
             setResult(RESULT_OK, returnIntent);
             finish();
         }
+    }
+
+    public void onBtnClickCancel(View view) { // return from activity
+        setResult(RESULT_CANCELED);
+        finish();
+    }
+
+    public void onBtnClickSun(View view) {
+       // change colour
+    }
+
+    public void onBtnClickMon(View view) {
+        //change colour
+    }
+
+    public void onBtnClickTue(View view) {
+        // change colour
+    }
+
+    public void onBtnClickWed(View view) {
+        //change colour
+    }
+
+    public void onBtnClickThu(View view) {
+        // change colour
+    }
+
+    public void onBtnClickFri(View view) {
+        //change colour
+    }
+
+    public void onBtnClickSat(View view) {
+        // change colour
     }
 }

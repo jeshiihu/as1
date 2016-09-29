@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_habit_tracker_creator"
 
     android:layout_width="match_parent"
@@ -67,7 +68,6 @@
     <EditText
         android:id="@+id/editText_date"
         android:textSize="18sp"
-        android:inputType="number"
 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -95,7 +95,8 @@
 
         android:layout_below="@id/textView_daysToRepeat"
         android:layout_centerHorizontal="true"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:onClick="onBtnClickWed" />
 
     <Button
         android:id="@+id/btn_tuesday"
@@ -107,7 +108,8 @@
 
         android:layout_below="@id/textView_daysToRepeat"
         android:layout_toLeftOf="@+id/btn_wednesday"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:onClick="onBtnClickTue" />
 
     <Button
         android:id="@+id/btn_monday"
@@ -119,7 +121,8 @@
 
         android:layout_below="@id/textView_daysToRepeat"
         android:layout_toLeftOf="@+id/btn_tuesday"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:onClick="onCtnClickMon" />
 
     <Button
         android:id="@+id/btn_sunday"
@@ -132,7 +135,8 @@
         android:layout_below="@id/textView_daysToRepeat"
         android:layout_toLeftOf="@+id/btn_monday"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:onClick="onBtnClickSun" />
 
     <Button
         android:id="@+id/btn_thursday"
@@ -144,7 +148,8 @@
 
         android:layout_below="@id/textView_daysToRepeat"
         android:layout_toRightOf="@+id/btn_wednesday"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:onClick="onBtnClickThu" />
 
     <Button
         android:id="@+id/btn_friday"
@@ -156,7 +161,8 @@
 
         android:layout_below="@id/textView_daysToRepeat"
         android:layout_toRightOf="@+id/btn_thursday"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:onClick="onBtnClickFri" />
 
     <Button
         android:id="@+id/btn_saturday"
@@ -169,7 +175,8 @@
         android:layout_below="@id/textView_daysToRepeat"
         android:layout_toRightOf="@+id/btn_friday"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:onClick="onBtnClickSat" />
     <!--REPEAT ON DAYS-->
 
 
@@ -184,10 +191,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:onClick="onBtnClickCancel" />
 
     <Button
-        android:id="@+id/btn_creatorOK"
+        android:id="@+id/btn_creatorAdd"
         android:text="@string/add"
         android:textSize="18sp"
         android:textColor="@android:color/white"
@@ -198,7 +206,7 @@
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@id/btn_creatorCancel"
         android:layout_marginRight="10dp"
-        android:onClick="addHabit" />
+        android:onClick="onBtnClickAddCreator" />
 
     <!--ADD AND CANCEL BUTTONS-->
 

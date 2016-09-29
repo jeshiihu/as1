@@ -85,13 +85,4 @@ public class DaysSetTest
         days.removeDay(DaysSet.Day.Sunday);
         assert(days.size() == 2);
     }
-
-    @Test
-    public void setCurrentDay() throws Exception
-    {
-        DaysSet days = new DaysSet();
-        days.setCurrentDay(DaysSet.Day.Friday);
-
-        assertSame(days.getCurrentDay(), DaysSet.Day.Friday);
-    }
 }

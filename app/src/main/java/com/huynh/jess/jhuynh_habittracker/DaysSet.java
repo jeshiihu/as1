@@ -1,5 +1,7 @@
 package com.huynh.jess.jhuynh_habittracker;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,11 +17,22 @@ public class DaysSet
     }
 
     private Set<Day> days;
-    private Day      currentDayOfWeek;
+    private Date     currentDate;
 
     public DaysSet()
     {
         days = new HashSet<Day>();
+        currentDate = new Date();
+    }
+
+    public void setCurrentDate(Date date) {
+        currentDate = date;
+    }
+
+    public String getCurrentDateStr(String s) {
+        SimpleDateFormat format = new SimpleDateFormat(s);
+
+        return format.format(currentDate);
     }
 
     public void addDay(Day day)
@@ -42,20 +55,6 @@ public class DaysSet
         return days.size();
     }
 
-    public void setCurrentDay(Day day)
-    {
-        this.currentDayOfWeek = day;
-    }
-
-    public Day getCurrentDay() throws Exception
-    {
-        if(this.currentDayOfWeek.equals(""))
-        {
-            throw new RuntimeException();
-        }
-        else
-        {
-            return this.currentDayOfWeek;
-        }
+    public void setCurrentDay(Day day){
     }
 }

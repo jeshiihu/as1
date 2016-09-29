@@ -25,10 +25,8 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-
 
 public class HabitTrackerDailyActivity extends AppCompatActivity {
 
@@ -115,7 +113,6 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
             HabitList loadedList = new HabitList((ArrayList<Habit>) gson.fromJson(in, listType));
             habitCtrl.clearHabits();
             habitCtrl.addMultipleHabits(loadedList);
-
         }
         catch (FileNotFoundException e)
         {
@@ -177,7 +174,8 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
         }
     }
 
-    public void addHabit(View view) {
+    // -------------- Buttton Click events --------------
+    public void onBtnClickAdd(View view) {
         setResult(RESULT_OK);
 
         //start new activity to create the habit
