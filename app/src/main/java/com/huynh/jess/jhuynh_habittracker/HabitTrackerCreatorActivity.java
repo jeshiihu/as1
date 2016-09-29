@@ -22,6 +22,7 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
 {
     private Habit newHabit;
     private String editStrDate;
+    private DaysSet days = new DaysSet();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,7 +31,7 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
         setContentView(R.layout.activity_habit_tracker_creator);
 
         // Get current date
-        final Date date = new Date(System.currentTimeMillis());
+        Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         editStrDate = format.format(date);
 
@@ -55,26 +56,6 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
             }
         });
 
-        Button addBtn = (Button)findViewById(R.id.btn_creatorOK);
-        addBtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                EditText editTitle = (EditText)findViewById(R.id.editText_habitTitle);
-                String sTitle = editTitle.getText().toString();
-                if(sTitle.length() != 0)
-                {
-                    Habit newHabit = new Habit(sTitle, date.toString());
-
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("newHabit", newHabit);
-                    setResult(RESULT_OK, returnIntent);
-                    finish();
-                }
-            }
-        });
-
         Button cancelBtn = (Button)findViewById(R.id.btn_creatorCancel);
         cancelBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -86,15 +67,35 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
             }
         });
 
+        days = new DaysSet();
         final Button mondayBtn = (Button)findViewById(R.id.btn_monday);
         mondayBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-//                if(isDaySelected())
-//                daySelected();
+                if(!days.isDayContained(DaysSet.Day.Monday)) {
+                    days.addDay(DaysSet.Day.Monday);
+                }
+                else { // unselecting day
+                    days.removeDay(DaysSet.Day.Monday);
+                }
             }
         });
+    }
+
+    public void addHabit(View view) {
+        EditText editTitle = (EditText)findViewById(R.id.editText_habitTitle);
+        String sTitle = editTitle.getText().toString();
+        if(sTitle.length() != 0)
+        {
+            Date date = new Date(System.currentTimeMillis());
+            Habit newHabit = new Habit(sTitle, date.toString());
+
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("newHabit", newHabit);
+            setResult(RESULT_OK, returnIntent);
+            finish();
+        }
     }
 }

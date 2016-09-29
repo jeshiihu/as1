@@ -19,7 +19,7 @@
         android:layout_centerHorizontal="true" />
 
     <ListView
-        android:id="@+id/oldHabitView"
+        android:id="@+id/habitListView"
 
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
@@ -29,7 +29,8 @@
         android:layout_below="@+id/textView_mainTitle"
         android:layout_above="@+id/btn_addHabit"
         android:scrollbars="vertical"
-        android:drawSelectorOnTop="true"/>
+        android:drawSelectorOnTop="true"
+        android:listSelector="?attr/selectableItemBackground" />
 
     <ImageButton
         android:id="@+id/btn_addHabit"
@@ -40,5 +41,6 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:onClick="addHabit" />
 </RelativeLayout>

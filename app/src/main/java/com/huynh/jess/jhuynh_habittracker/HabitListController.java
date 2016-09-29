@@ -1,27 +1,43 @@
 package com.huynh.jess.jhuynh_habittracker;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import static android.provider.Telephony.Mms.Part.FILENAME;
 
 /**
  * Created by Jess on 2016-09-26.
  */
 
 public class HabitListController {
-    private ArrayList<Habit> habitsList;
-
+    private static HabitList habitsList;
 
     public HabitListController()
     {
-        habitsList = new ArrayList<Habit>();
+        habitsList = new HabitList();
     }
 
-    public ArrayList<Habit> getArray()
+    public HabitList getHabitList()
     {
-        return this.habitsList;
+        return habitsList;
     }
 
     public void addHabit(Habit habit) {
-        habitsList.add(habit);
+        habitsList.addHabit(habit);
+    }
+
+
+    public void addMultipleHabits(HabitList loadedList) {
+        for(Habit h : loadedList.getHabits())
+        {
+            habitsList.addHabit(h);
+        }
     }
 
     public int size() {
@@ -30,21 +46,18 @@ public class HabitListController {
 
     public Habit getHabit(int index) {
         try {
-            return habitsList.get(index);
+            return habitsList.getHabit(index);
         } catch(IndexOutOfBoundsException exception){
             throw new IndexOutOfBoundsException();
         }
     }
 
-    public void removeHabit(int index){
-        try {
-            this.habitsList.remove(index);
-        } catch (IndexOutOfBoundsException exception) {
-            throw new IndexOutOfBoundsException();
-        }
+    public void removeHabit(Habit habit){
+        habitsList.removeHabit(habit);
     }
 
-    public void reset() {
-        this.habitsList = new ArrayList<Habit>();
+    public void clearHabits() {
+        habitsList.removeAll();
     }
+
 }

@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 
 
@@ -35,9 +36,12 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
     public final static int REQ_CODE_EDITOR = 2;
 
     private static final String FILENAME = "file.sav";
-    private ListView oldHabitList;
-    private ArrayList<Habit> habitList = new ArrayList<Habit>();
-    private ArrayAdapter<Habit> adapter;
+    private HabitListController habitCtrl = new HabitListController();
+
+//    private ListView oldHabitList;
+//    private ArrayList<Habit> habitList = new ArrayList<Habit>();
+//    private ArrayAdapter<Habit> adapter;
+
 
     private int   selectedIndex;
 
@@ -47,31 +51,41 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_tracker_daily);
 
+        ListView listview = (ListView)findViewById(R.id.habitListView);
+        final ArrayList<Habit> list;
+        if(habitCtrl.getHabitList() != null)
+        {
+            Collection<Habit> habits = habitCtrl.getHabitList().getHabits();
+            list = new ArrayList<Habit>(habits);
+        }
+        else{
+            habitCtrl.clearHabits();
+            list = new ArrayList<Habit>();
+        }
+
+        final ArrayAdapter<Habit> habitAdapter = new ArrayAdapter<Habit>(this, R.layout.list_item, list);
+        listview.setAdapter(habitAdapter);
+
+        habitCtrl.getHabitList().addListener(new Listener() {
+            @Override
+            public void update() {
+                list.clear();
+                Collection<Habit> students = habitCtrl.getHabitList().getHabits();
+                list.addAll(students);
+                habitAdapter.notifyDataSetChanged();
+                saveInFile();
+            }
+        });
+
         TextView textCurrentDay = (TextView)findViewById(R.id.textView_mainTitle);
         Date dayOfWeek = new Date(System.currentTimeMillis());
         SimpleDateFormat format = new SimpleDateFormat("EEEE");
         textCurrentDay.setText(format.format(dayOfWeek));
 
         ImageButton addButton = (ImageButton)findViewById(R.id.btn_addHabit);
-        oldHabitList = (ListView)findViewById(R.id.oldHabitView);
+        listview = (ListView)findViewById(R.id.habitListView);
 
-        addButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setResult(RESULT_OK);
-
-                //start new activity to create the habit
-                Date currDate = new Date(System.currentTimeMillis());
-                Habit newHabit = new Habit("", currDate.toString());
-
-                Intent intentCreator = new Intent(HabitTrackerDailyActivity.this , HabitTrackerCreatorActivity.class);
-                startActivityForResult(intentCreator, REQ_CODE_CREATOR);
-            }
-        });
-
-        oldHabitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedIndex = i;
@@ -86,8 +100,6 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
     {
         super.onStart();
         loadFromFile();
-        adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, habitList);
-        oldHabitList.setAdapter(adapter);
     }
 
     private void loadFromFile()
@@ -100,12 +112,14 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
             Gson gson = new Gson();
             // code taken from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt Sept.22, 2016
             Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
-            habitList = gson.fromJson(in, listType);
+            HabitList loadedList = new HabitList((ArrayList<Habit>) gson.fromJson(in, listType));
+            habitCtrl.clearHabits();
+            habitCtrl.addMultipleHabits(loadedList);
 
         }
         catch (FileNotFoundException e)
         {
-            habitList = new ArrayList<Habit>();
+            habitCtrl.clearHabits();
         }
         catch (IOException e)
         {
@@ -120,7 +134,7 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
             OutputStreamWriter writer = new OutputStreamWriter(fos);
 
             Gson gson = new Gson();
-            gson.toJson(habitList, writer);
+            gson.toJson(habitCtrl.getHabitList().getHabits(), writer);
 
             writer.flush();
         }
@@ -142,9 +156,7 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK)
             {
                 Habit newHabit = (Habit) data.getExtras().getSerializable("newHabit");
-                habitList.add(newHabit);
-                adapter.notifyDataSetChanged();
-                saveInFile();
+                habitCtrl.getHabitList().addHabit(newHabit);
             }
             else if(resultCode == RESULT_CANCELED)
             {
@@ -159,11 +171,17 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
                 String action = data.getExtras().getString("actionType");
                 if(action.equals("delete"))
                 {
-                    habitList.remove(selectedIndex);
-                    adapter.notifyDataSetChanged();
-                    saveInFile();
+                    habitCtrl.getHabitList().removeHabit(selectedIndex);
                 }
             }
         }
+    }
+
+    public void addHabit(View view) {
+        setResult(RESULT_OK);
+
+        //start new activity to create the habit
+        Intent intentCreator = new Intent(HabitTrackerDailyActivity.this , HabitTrackerCreatorActivity.class);
+        startActivityForResult(intentCreator, REQ_CODE_CREATOR);
     }
 }
