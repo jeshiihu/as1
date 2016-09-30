@@ -36,30 +36,6 @@ public class HabitTest {
     }
 
     @Test
-    public void setDateValid() throws Exception
-    {
-        Habit habit = new Habit();
-        habit.setDate("2016-09-22");
-        assert(habit.getDate().equals("2016-09-22"));
-    }
-
-    @Test
-    public void setDateInvalid() throws Exception
-    {
-        Habit habit = new Habit();
-        Boolean caught = Boolean.FALSE;
-
-        try {
-            habit.setDate("2016 09 22"); // wrong format
-        } catch(FormatException expException)
-        {
-            caught = Boolean.TRUE;
-        }
-
-        assert(caught);
-    }
-
-    @Test
     public void setDays() throws Exception
     {
         Habit habit = new Habit();

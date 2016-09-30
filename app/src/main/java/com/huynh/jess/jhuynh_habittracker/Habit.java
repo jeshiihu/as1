@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 public class Habit implements Serializable
 {
     private String  habitTitle;
-    private String  habitCreationDate;
     private DaysSet setOfDays;
 
     public Habit()
@@ -23,10 +22,9 @@ public class Habit implements Serializable
         this.habitTitle = "";
     }
 
-    public Habit(String title, String date)
+    public Habit(String title)
     {
         this.habitTitle = title;
-        this.habitCreationDate = date;
     }
 
     @Override
@@ -43,21 +41,6 @@ public class Habit implements Serializable
     public String getTitle()
     {
         return this.habitTitle;
-    }
-
-    public void setDate(String date) throws Exception
-    {
-        if(!date.matches("\\d{4}-\\d{2}-\\d{2}"))
-        {
-            throw new FormatException();
-        }
-
-        this.habitCreationDate = date;
-    }
-
-    public String getDate()
-    {
-        return this.habitCreationDate;
     }
 
     public void setDays(DaysSet days)

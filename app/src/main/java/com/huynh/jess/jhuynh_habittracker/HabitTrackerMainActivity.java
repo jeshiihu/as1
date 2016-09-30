@@ -47,7 +47,7 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_habit_tracker_daily);
+        setContentView(R.layout.activity_habit_tracker_main);
 
         ListView listview = (ListView)findViewById(R.id.habitListView);
         final ArrayList<Habit> list;

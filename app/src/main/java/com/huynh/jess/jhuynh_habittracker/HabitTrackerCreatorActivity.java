@@ -31,12 +31,13 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
 
         // Get current date & auto fill the date edit text
         EditText editDate = (EditText)findViewById(R.id.editText_date);
-        days.setCurrentDate(new Date(System.currentTimeMillis()));
+        days.setCurrentDateByDate(new Date(System.currentTimeMillis()));
         editDate.setText(days.getCurrentDateStr("yyyy-MM-dd"));
     }
 
     // -------------- Buttton Click events --------------
-    public void onBtnClickAddCreator(View view) {
+    public void onBtnClickAddCreator(View view) throws Exception
+    {
         EditText editTitle = (EditText)findViewById(R.id.editText_habitTitle);
 
         if(editTitle.getText().toString().length() == 0)
@@ -46,18 +47,18 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
         }
 
         EditText editDate = (EditText)findViewById(R.id.editText_date);
-        String dateStr = editDate.getText().toString();
-        SimpleDateFormat validFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        try {
-            Date test = validFormat.parse(dateStr);
-        } catch (ParseException e) {
+        try
+        {
+            days.setCurrentDateByStr(editDate.getText().toString());
+        }
+        catch (IllegalArgumentException e)
+        {
             Toast.makeText(this, "Invalid date: yyyy-MM-dd", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Date date = new Date(System.currentTimeMillis());
-        Habit newHabit = new Habit(editTitle.getText().toString(), date.toString());
+        Habit newHabit = new Habit(editTitle.getText().toString());
 
         Intent returnIntent = new Intent();
         returnIntent.putExtra("newHabit", newHabit);

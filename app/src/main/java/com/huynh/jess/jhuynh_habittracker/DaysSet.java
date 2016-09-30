@@ -1,6 +1,7 @@
 package com.huynh.jess.jhuynh_habittracker;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,9 +26,28 @@ public class DaysSet
         currentDate = new Date();
     }
 
-    public void setCurrentDate(Date date) {
+    public void setCurrentDateByDate(Date date) {
         currentDate = date;
     }
+
+    public void setCurrentDateByStr(String dateStr) throws Exception
+    {
+        SimpleDateFormat validFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        try
+        {
+            Date date = validFormat.parse(dateStr);
+
+            Calendar cal = Calendar.getInstance();
+            cal.setLenient(false);
+            cal.setTime(date);
+            cal.getTime();
+        }
+        catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
 
     public String getCurrentDateStr(String s) {
         SimpleDateFormat format = new SimpleDateFormat(s);
