@@ -49,6 +49,5 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/habitListView"
         android:layout_marginBottom="18dp"
-        android:layout_alignParentRight="true"
-        android: />
+        android:layout_alignParentRight="true" />
 </RelativeLayout>
