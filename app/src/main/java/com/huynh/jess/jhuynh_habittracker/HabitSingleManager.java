@@ -11,4 +11,14 @@ public class HabitSingleManager
     {
 
     }
+
+    public void setCompletedHabit(CompletedHabit completed)
+    {
+        completedHabit = completed;
+    }
+
+    public CompletedHabit getCompletedHabit()
+    {
+        return completedHabit;
+    }
 }
