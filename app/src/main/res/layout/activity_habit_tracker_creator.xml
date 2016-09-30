@@ -85,97 +85,100 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@id/editText_date"/>
 
-    <Button
-        android:id="@+id/btn_wednesday"
-        android:background="@drawable/circle_button"
-        android:text="@string/wednesday"
-
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-
-        android:layout_below="@id/textView_daysToRepeat"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="5dp"
-        android:onClick="onBtnClickWed" />
-
-    <Button
-        android:id="@+id/btn_tuesday"
-        android:background="@drawable/circle_button"
-        android:text="@string/tuesday"
-
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-
-        android:layout_below="@id/textView_daysToRepeat"
-        android:layout_toLeftOf="@+id/btn_wednesday"
-        android:layout_margin="5dp"
-        android:onClick="onBtnClickTue" />
 
     <Button
         android:id="@+id/btn_monday"
-        android:background="@drawable/circle_button"
         android:text="@string/monday"
 
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
         android:layout_below="@id/textView_daysToRepeat"
-        android:layout_toLeftOf="@+id/btn_tuesday"
-        android:layout_margin="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/gray"
         android:onClick="onCtnClickMon" />
 
     <Button
-        android:id="@+id/btn_sunday"
-        android:background="@drawable/circle_button"
-        android:text="@string/sunday"
+        android:id="@+id/btn_tuesday"
+        android:text="@string/tuesday"
 
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
         android:layout_below="@id/textView_daysToRepeat"
-        android:layout_toLeftOf="@+id/btn_monday"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:onClick="onBtnClickSun" />
+        android:layout_toRightOf="@+id/btn_monday"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/gray"
+        android:onClick="onBtnClickTue" />
+
+    <Button
+        android:id="@+id/btn_wednesday"
+        android:text="@string/wednesday"
+
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+
+        android:layout_below="@id/textView_daysToRepeat"
+        android:layout_toRightOf="@+id/btn_tuesday"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/gray"
+        android:onClick="onBtnClickWed" />
 
     <Button
         android:id="@+id/btn_thursday"
-        android:background="@drawable/circle_button"
         android:text="@string/thursday"
 
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
         android:layout_below="@id/textView_daysToRepeat"
         android:layout_toRightOf="@+id/btn_wednesday"
-        android:layout_margin="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/gray"
         android:onClick="onBtnClickThu" />
 
     <Button
         android:id="@+id/btn_friday"
-        android:background="@drawable/circle_button"
         android:text="@string/friday"
 
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
         android:layout_below="@id/textView_daysToRepeat"
         android:layout_toRightOf="@+id/btn_thursday"
-        android:layout_margin="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/gray"
         android:onClick="onBtnClickFri" />
 
     <Button
+        android:id="@+id/btn_sunday"
+        android:text="@string/sunday"
+
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/btn_monday"
+        android:layout_marginTop="8dp"
+        android:background="@color/gray"
+        android:onClick="onBtnClickSun" />
+
+    <Button
         android:id="@+id/btn_saturday"
-        android:background="@drawable/circle_button"
         android:text="@string/saturday"
 
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
-        android:layout_below="@id/textView_daysToRepeat"
-        android:layout_toRightOf="@+id/btn_friday"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_below="@id/btn_tuesday"
+        android:layout_toRightOf="@+id/btn_sunday"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/gray"
         android:onClick="onBtnClickSat" />
     <!--REPEAT ON DAYS-->
 
