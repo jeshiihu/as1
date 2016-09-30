@@ -11,14 +11,14 @@ import static org.junit.Assert.*;
 public class DaysSetTest
 {
     @Test
-    public void isDayContainedEmpty() throws Exception
+    public void testIsDayContainedEmpty() throws Exception
     {
         DaysSet days = new DaysSet();
         assert(days.size() == 0);
     }
 
     @Test
-    public void addDaySingle() throws Exception
+    public void testAddDaySingle() throws Exception
     {
         DaysSet days = new DaysSet();
         days.addDay(DaysSet.Day.Friday);
@@ -26,7 +26,7 @@ public class DaysSetTest
     }
 
     @Test
-    public void addDaySingleInvalid() throws Exception
+    public void testAddDaySingleInvalid() throws Exception
     {
         DaysSet days = new DaysSet();
         days.addDay(DaysSet.Day.Friday);
@@ -34,7 +34,7 @@ public class DaysSetTest
     }
 
     @Test
-    public void addDayMultiple() throws Exception
+    public void testAddDayMultiple() throws Exception
     {
         DaysSet days = new DaysSet();
         days.addDay(DaysSet.Day.Friday);
@@ -44,7 +44,7 @@ public class DaysSetTest
     }
 
     @Test
-    public void addDayMultipleInvalid() throws Exception
+    public void testAddDayMultipleInvalid() throws Exception
     {
         DaysSet days = new DaysSet();
         days.addDay(DaysSet.Day.Friday);
@@ -54,14 +54,14 @@ public class DaysSetTest
     }
 
     @Test
-    public void removeEmpty() throws Exception
+    public void testRemoveEmpty() throws Exception
     {
         DaysSet days = new DaysSet();
         days.removeDay(DaysSet.Day.Friday); // make sure no exception thrown
     }
 
     @Test
-    public void removeDaySingle() throws Exception
+    public void testRemoveDaySingle() throws Exception
     {
         DaysSet days = new DaysSet();
         days.addDay(DaysSet.Day.Friday);
@@ -73,7 +73,7 @@ public class DaysSetTest
     }
 
     @Test
-    public void removeDayMultiple() throws Exception
+    public void testRemoveDayMultiple() throws Exception
     {
         DaysSet days = new DaysSet();
         days.addDay(DaysSet.Day.Friday);

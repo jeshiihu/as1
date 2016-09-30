@@ -1,5 +1,6 @@
 package com.huynh.jess.jhuynh_habittracker;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.Set;
  * Created by Jess on 2016-09-26.
  */
 
-public class DaysSet
+public class DaysSet implements Serializable
 {
     public enum Day
     {
@@ -18,41 +19,32 @@ public class DaysSet
     }
 
     private Set<Day> days;
-    private Date     currentDate;
+    private String   currentDate;
 
     public DaysSet()
     {
         days = new HashSet<Day>();
-        currentDate = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = format.format(new Date(System.currentTimeMillis()));
     }
 
-    public void setCurrentDateByDate(Date date) {
-        currentDate = date;
+    public void setCurrentDateByDate(Date date)
+    {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = format.format(date);
     }
 
     public void setCurrentDateByStr(String dateStr) throws Exception
     {
-        SimpleDateFormat validFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        try
-        {
-            Date date = validFormat.parse(dateStr);
-
-            Calendar cal = Calendar.getInstance();
-            cal.setLenient(false);
-            cal.setTime(date);
-            cal.getTime();
-        }
-        catch (Exception e) {
+        if(dateStr.matches("\\d{4}-\\d{2}-\\d{2}"))
+            currentDate = dateStr;
+        else
             throw new IllegalArgumentException();
-        }
     }
 
-
-    public String getCurrentDateStr(String s) {
-        SimpleDateFormat format = new SimpleDateFormat(s);
-
-        return format.format(currentDate);
+    public String getCurrentDate()
+    {
+        return currentDate;
     }
 
     public void addDay(Day day)
@@ -75,6 +67,8 @@ public class DaysSet
         return days.size();
     }
 
-    public void setCurrentDay(Day day){
+    public Boolean isEmpty()
+    {
+        return days.isEmpty();
     }
 }

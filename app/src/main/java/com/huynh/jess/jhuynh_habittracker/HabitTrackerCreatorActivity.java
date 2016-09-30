@@ -22,9 +22,7 @@ import java.util.Date;
 
 public class HabitTrackerCreatorActivity extends AppCompatActivity
 {
-    private Habit newHabit;
-    private DaysSet days = new DaysSet();
-    private View view;
+    private HabitCreatorManager manager = new HabitCreatorManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,39 +32,33 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
 
         // Get current date & auto fill the date edit text
         EditText editDate = (EditText)findViewById(R.id.editText_date);
-        days.setCurrentDateByDate(new Date(System.currentTimeMillis()));
-        editDate.setText(days.getCurrentDateStr("yyyy-MM-dd"));
+        editDate.setText(manager.getCreatedDate());
     }
 
     // -------------- Buttton Click events --------------
-    public void onBtnClickAddCreator(View view) throws Exception
+    public void onBtnClickAddCreator(View view)
     {
         EditText editTitle = (EditText)findViewById(R.id.editText_habitTitle);
-
-        if(editTitle.getText().toString().length() == 0)
-        {
-            Toast.makeText(this, "Please enter title", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        manager.setTitle(editTitle.getText().toString());
 
         EditText editDate = (EditText)findViewById(R.id.editText_date);
+        manager.setCreatedDateByStr(editDate.getText().toString());
 
-        try
-        {
-            days.setCurrentDateByStr(editDate.getText().toString());
-        }
-        catch (IllegalArgumentException e)
-        {
+        if(!manager.isValidTitle())
+            Toast.makeText(this, "Please enter title", Toast.LENGTH_SHORT).show();
+        else
+        if(!manager.isValidDate())
             Toast.makeText(this, "Invalid date: yyyy-MM-dd", Toast.LENGTH_SHORT).show();
-            return;
+        else
+        if(!manager.isValidRepeatSelection())
+            Toast.makeText(this, "Please select at least one repeat day", Toast.LENGTH_SHORT).show();
+        else
+        {
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("newHabit", manager.generateCreatedHabit());
+            setResult(RESULT_OK, returnIntent);
+            finish();
         }
-
-        Habit newHabit = new Habit(editTitle.getText().toString());
-
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra("newHabit", newHabit);
-        setResult(RESULT_OK, returnIntent);
-        finish();
     }
 
     public void onBtnClickCancel(View view)
@@ -75,19 +67,18 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
         finish();
     }
 
-
     public void onCtnClickMon(View view)
     {
         Button btnMon = (Button)findViewById(R.id.btn_monday);
 
-        if(days.isDayContained(DaysSet.Day.Monday))
+        if(manager.getDaysSet().isDayContained(DaysSet.Day.Monday))
         {
             btnMon.setBackgroundColor(ContextCompat.getColor(this, R.color.gray));
-            days.removeDay(DaysSet.Day.Monday);
+            manager.getDaysSet().removeDay(DaysSet.Day.Monday);
         }
         else {
             btnMon.setBackgroundColor(ContextCompat.getColor(this, R.color.yellow));
-            days.addDay(DaysSet.Day.Monday);
+            manager.getDaysSet().addDay(DaysSet.Day.Monday);
         }
     }
 
@@ -95,14 +86,14 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
     {
         Button btnTue = (Button)findViewById(R.id.btn_tuesday);
 
-        if(days.isDayContained(DaysSet.Day.Tuesday))
+        if(manager.getDaysSet().isDayContained(DaysSet.Day.Tuesday))
         {
             btnTue.setBackgroundColor(ContextCompat.getColor(this, R.color.gray));
-            days.removeDay(DaysSet.Day.Tuesday);
+            manager.getDaysSet().removeDay(DaysSet.Day.Tuesday);
         }
         else {
             btnTue.setBackgroundColor(ContextCompat.getColor(this, R.color.yellow));
-            days.addDay(DaysSet.Day.Tuesday);
+            manager.getDaysSet().addDay(DaysSet.Day.Tuesday);
         }
     }
 
@@ -110,14 +101,14 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
     {
         Button btnWed = (Button)findViewById(R.id.btn_wednesday);
 
-        if(days.isDayContained(DaysSet.Day.Wednesday))
+        if(manager.getDaysSet().isDayContained(DaysSet.Day.Wednesday))
         {
             btnWed.setBackgroundColor(ContextCompat.getColor(this, R.color.gray));
-            days.removeDay(DaysSet.Day.Wednesday);
+            manager.getDaysSet().removeDay(DaysSet.Day.Wednesday);
         }
         else {
             btnWed.setBackgroundColor(ContextCompat.getColor(this, R.color.yellow));
-            days.addDay(DaysSet.Day.Wednesday);
+            manager.getDaysSet().addDay(DaysSet.Day.Wednesday);
         }
     }
 
@@ -125,14 +116,14 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
     {
         Button btnThu = (Button)findViewById(R.id.btn_thursday);
 
-        if(days.isDayContained(DaysSet.Day.Thursday))
+        if(manager.getDaysSet().isDayContained(DaysSet.Day.Thursday))
         {
             btnThu.setBackgroundColor(ContextCompat.getColor(this, R.color.gray));
-            days.removeDay(DaysSet.Day.Thursday);
+            manager.getDaysSet().removeDay(DaysSet.Day.Thursday);
         }
         else {
             btnThu.setBackgroundColor(ContextCompat.getColor(this, R.color.yellow));
-            days.addDay(DaysSet.Day.Thursday);
+            manager.getDaysSet().addDay(DaysSet.Day.Thursday);
         }
     }
 
@@ -140,14 +131,14 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
     {
         Button btnFri = (Button)findViewById(R.id.btn_friday);
 
-        if(days.isDayContained(DaysSet.Day.Friday))
+        if(manager.getDaysSet().isDayContained(DaysSet.Day.Friday))
         {
             btnFri.setBackgroundColor(ContextCompat.getColor(this, R.color.gray));
-            days.removeDay(DaysSet.Day.Friday);
+            manager.getDaysSet().removeDay(DaysSet.Day.Friday);
         }
         else {
             btnFri.setBackgroundColor(ContextCompat.getColor(this, R.color.yellow));
-            days.addDay(DaysSet.Day.Friday);
+            manager.getDaysSet().addDay(DaysSet.Day.Friday);
         }
     }
 
@@ -155,14 +146,14 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
     {
         Button btnSat = (Button)findViewById(R.id.btn_saturday);
 
-        if(days.isDayContained(DaysSet.Day.Saturday))
+        if(manager.getDaysSet().isDayContained(DaysSet.Day.Saturday))
         {
             btnSat.setBackgroundColor(ContextCompat.getColor(this, R.color.gray));
-            days.removeDay(DaysSet.Day.Saturday);
+            manager.getDaysSet().removeDay(DaysSet.Day.Saturday);
         }
         else {
             btnSat.setBackgroundColor(ContextCompat.getColor(this, R.color.yellow));
-            days.addDay(DaysSet.Day.Saturday);
+            manager.getDaysSet().addDay(DaysSet.Day.Saturday);
         }
     }
 
@@ -170,14 +161,14 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
     {
         Button btnSun = (Button)findViewById(R.id.btn_sunday);
 
-        if(days.isDayContained(DaysSet.Day.Sunday))
+        if(manager.getDaysSet().isDayContained(DaysSet.Day.Sunday))
         {
             btnSun.setBackgroundColor(ContextCompat.getColor(this, R.color.gray));
-            days.removeDay(DaysSet.Day.Sunday);
+            manager.getDaysSet().removeDay(DaysSet.Day.Sunday);
         }
         else {
             btnSun.setBackgroundColor(ContextCompat.getColor(this, R.color.yellow));
-            days.addDay(DaysSet.Day.Sunday);
+            manager.getDaysSet().addDay(DaysSet.Day.Sunday);
         }
     }
 }
