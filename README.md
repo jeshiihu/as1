@@ -17,3 +17,7 @@ Sept. 24, 2016: Getting string for day of the week, formating string to yyyy-dd-
 	Answer by User: JDeveloper, http://stackoverflow.com/users/1503849/jdeveloper <br />
 	Edited by User: Joel Christophel, http://stackoverflow.com/users/1713149/joel-christophel <br />
 	Question: http://stackoverflow.com/questions/5270272/how-to-determine-day-of-week-by-passing-specific-date <br />
+
+Sept. 26, 2016: Returning objects from activities
+	Answer by User: Aleks Gekht, http://stackoverflow.com/users/717214/aleks-g <b/>
+	Question: http://stackoverflow.com/questions/26703691/android-return-object-as-a-activity-result

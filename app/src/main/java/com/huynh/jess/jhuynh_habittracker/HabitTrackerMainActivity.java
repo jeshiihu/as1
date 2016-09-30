@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-public class HabitTrackerDailyActivity extends AppCompatActivity {
+public class HabitTrackerMainActivity extends AppCompatActivity {
 
     public final static int REQ_CODE_CREATOR = 1;
     public final static int REQ_CODE_EDITOR = 2;
@@ -87,7 +87,7 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedIndex = i;
-                Intent editIntent = new Intent(HabitTrackerDailyActivity.this , HabitTrackerEditActivity.class);
+                Intent editIntent = new Intent(HabitTrackerMainActivity.this , HabitTrackerEditActivity.class);
                 startActivityForResult(editIntent, REQ_CODE_EDITOR);
             }
         });
@@ -179,7 +179,7 @@ public class HabitTrackerDailyActivity extends AppCompatActivity {
         setResult(RESULT_OK);
 
         //start new activity to create the habit
-        Intent intentCreator = new Intent(HabitTrackerDailyActivity.this , HabitTrackerCreatorActivity.class);
+        Intent intentCreator = new Intent(HabitTrackerMainActivity.this , HabitTrackerCreatorActivity.class);
         startActivityForResult(intentCreator, REQ_CODE_CREATOR);
     }
 }

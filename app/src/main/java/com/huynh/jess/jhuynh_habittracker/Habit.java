@@ -12,10 +12,6 @@ import java.util.regex.Pattern;
  * Created by Jess on 2016-09-24.
  */
 
-// Code referenced from: Aleks Gekht
-// http://stackoverflow.com/questions/26703691/android-return-object-as-a-activity-result
-// this class needs to be serializable or parcelable in order to be returned from activiy
-
 public class Habit implements Serializable
 {
     private String  habitTitle;
