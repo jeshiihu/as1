@@ -26,3 +26,8 @@ Sept. 29, 2016: Validating date<br />
 	Answer by User: AdamC, http://stackoverflow.com/users/16476/adamc <br />
 	Edited by User: Mateus Viccari, http://stackoverflow.com/users/2332384/mateus-viccari <br />
 	Question: http://stackoverflow.com/questions/226910/how-to-sanity-check-a-date-in-java <br />
+
+Android: Licensed Creative Commons Attribution 2.5
+--------------------------------------------------------------
+Sept 29, 2016: Spinner<br />
+https://developer.android.com/guide/topics/ui/controls/spinner.html<br />

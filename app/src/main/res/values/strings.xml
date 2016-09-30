@@ -23,4 +23,15 @@
 
     <string name="view_history">View History</string>
 
+    <string-array name="spinner_views">
+        <item>All Habits</item>
+        <item>All History</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 </resources>

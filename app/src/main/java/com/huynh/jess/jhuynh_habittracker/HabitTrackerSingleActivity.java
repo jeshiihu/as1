@@ -2,7 +2,6 @@ package com.huynh.jess.jhuynh_habittracker;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -14,8 +13,9 @@ import android.widget.ImageButton;
  * Created by Jess on 2016-09-25.
  */
 
-public class HabitTrackerEditActivity extends AppCompatActivity
+public class HabitTrackerSingleActivity extends AppCompatActivity
 {
+
     private final String DELETE_ACTION = "delete";
 
     @Override
@@ -41,7 +41,7 @@ public class HabitTrackerEditActivity extends AppCompatActivity
 
     public void onBtnClickDelete(View view)
     {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(HabitTrackerEditActivity.this);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(HabitTrackerSingleActivity.this);
         alertBuilder.setMessage("Are you sure you want to delete this habit?");
         alertBuilder.setCancelable(true);
 
@@ -65,5 +65,4 @@ public class HabitTrackerEditActivity extends AppCompatActivity
         AlertDialog deleteAlert = alertBuilder.create();
         deleteAlert.show();
     }
-
 }

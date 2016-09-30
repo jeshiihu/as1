@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -87,10 +88,15 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedIndex = i;
-                Intent editIntent = new Intent(HabitTrackerMainActivity.this , HabitTrackerEditActivity.class);
+                Intent editIntent = new Intent(HabitTrackerMainActivity.this , HabitTrackerSingleActivity.class);
                 startActivityForResult(editIntent, REQ_CODE_EDITOR);
             }
         });
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerView);
+        ArrayAdapter<CharSequence> adapterSpinner = ArrayAdapter.createFromResource(this, R.array.spinner_views, android.R.layout.simple_spinner_item);
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterSpinner);
     }
 
     @Override
