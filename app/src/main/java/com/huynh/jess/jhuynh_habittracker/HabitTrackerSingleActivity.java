@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 /**
  * Created by Jess on 2016-09-25.
@@ -15,7 +16,7 @@ import android.widget.ImageButton;
 
 public class HabitTrackerSingleActivity extends AppCompatActivity
 {
-
+    private HabitSingleManager manager = new HabitSingleManager();
     private final String DELETE_ACTION = "delete";
 
     @Override
@@ -23,6 +24,13 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_tracker_single);
+
+        Habit habit = (Habit)getIntent().getExtras().getSerializable("habit");
+        CompletedHabit completedHabit = new CompletedHabit(habit);
+        manager.setCompletedHabit(completedHabit);
+
+        TextView title = (TextView)findViewById(R.id.textView_editorTitle);
+        title.setText(manager.getCompletedHabit().getHabit().toString());
     }
 
     private void leaveView(String buttonPressed)

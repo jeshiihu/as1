@@ -89,6 +89,7 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedIndex = i;
                 Intent editIntent = new Intent(HabitTrackerMainActivity.this , HabitTrackerSingleActivity.class);
+                editIntent.putExtra("habit", habitCtrl.getHabitList().getHabit(i));
                 startActivityForResult(editIntent, REQ_CODE_EDITOR);
             }
         });
