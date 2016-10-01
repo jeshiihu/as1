@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class HabitTrackerSingleActivity extends AppCompatActivity
 {
-    private HabitSingleManager manager = new HabitSingleManager();
+    private HabitSingleManager manager;
     private final String DELETE_ACTION = "delete";
 
     @Override
@@ -26,11 +26,16 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
         setContentView(R.layout.activity_habit_tracker_single);
 
         Habit habit = (Habit)getIntent().getExtras().getSerializable("habit");
-        CompletedHabit completedHabit = new CompletedHabit(habit);
-        manager.setCompletedHabit(completedHabit);
+        manager = new HabitSingleManager(habit);
 
-        TextView title = (TextView)findViewById(R.id.textView_editorTitle);
-        title.setText(manager.getCompletedHabit().getHabit().toString());
+        TextView title = (TextView)findViewById(R.id.singleView_habitTitle);
+        title.setText(manager.getHabit().toString());
+
+        TextView date = (TextView)findViewById(R.id.singleView_date);
+        date.setText(manager.getHabit().getCreatedDate());
+
+        TextView repeatedDays = (TextView)findViewById(R.id.singleView_repeatDays);
+        repeatedDays.setText(manager.getHabit().getDays().toString());
     }
 
     private void leaveView(String buttonPressed)

@@ -5,20 +5,43 @@ package com.huynh.jess.jhuynh_habittracker;
  */
 public class HabitSingleManager
 {
-    CompletedHabit completedHabit;
+    private Habit passedInHabit;
+    private CompletedHabit completedHabit;
+    private Boolean habitCompleted = Boolean.FALSE;
 
-    public void HabitSingleManager()
+    public HabitSingleManager(Habit habit)
     {
-
+        passedInHabit = habit;
     }
 
-    public void setCompletedHabit(CompletedHabit completed)
+    public CompletedHabit getCompletedHabit() throws Exception
     {
-        completedHabit = completed;
-    }
+        if(!habitCompleted)
+            throw new RuntimeException();
 
-    public CompletedHabit getCompletedHabit()
-    {
         return completedHabit;
+    }
+
+    public Habit getHabit()
+    {
+        return passedInHabit;
+    }
+
+    public Boolean isHabitCompleted()
+    {
+        return habitCompleted;
+    }
+
+    public void completeHabit()
+    {
+        if(!habitCompleted)
+        {
+            completedHabit = new CompletedHabit(passedInHabit);
+            completedHabit.complete();
+        }
+        else
+        {
+            
+        }
     }
 }

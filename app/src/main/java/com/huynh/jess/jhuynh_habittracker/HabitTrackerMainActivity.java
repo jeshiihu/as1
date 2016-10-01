@@ -109,26 +109,26 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
 
     private void loadFromFile()
     {
-        try
-        {
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-
-            Gson gson = new Gson();
-            // code taken from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt Sept.22, 2016
-            Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
-            HabitList loadedList = new HabitList((ArrayList<Habit>) gson.fromJson(in, listType));
-            habitCtrl.clearHabits();
-            habitCtrl.addMultipleHabits(loadedList);
-        }
-        catch (FileNotFoundException e)
-        {
-            habitCtrl.clearHabits();
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException();
-        }
+//        try
+//        {
+//            FileInputStream fis = openFileInput(FILENAME);
+//            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+//
+//            Gson gson = new Gson();
+//            // code taken from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt Sept.22, 2016
+//            Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
+//            HabitList loadedList = new HabitList((ArrayList<Habit>) gson.fromJson(in, listType));
+//            habitCtrl.clearHabits();
+//            habitCtrl.addMultipleHabits(loadedList);
+//        }
+//        catch (FileNotFoundException e)
+//        {
+//            habitCtrl.clearHabits();
+//        }
+//        catch (IOException e)
+//        {
+//            throw new RuntimeException();
+//        }
     }
 
     private void saveInFile() {

@@ -16,20 +16,11 @@ import static org.junit.Assert.*;
 public class HabitSingleManagerTest
 {
     @Test
-    public void setAndGetCompletedHabit()
+    public void getContainedHabit()
     {
-        HabitSingleManager manager = new HabitSingleManager();
-        CompletedHabit completed = new CompletedHabit(new Habit());
-        manager.setCompletedHabit(completed);
+        Habit habit = new Habit();
+        HabitSingleManager manager = new HabitSingleManager(habit);
 
-        assertSame(manager.getCompletedHabit(), completed);
-    }
-
-    @Test
-    public void getDailyCompletions()
-    {
-        HabitSingleManager manager = new HabitSingleManager();
-        CompletedHabit completed = new CompletedHabit(new Habit());
-        completed.complete();
+        assertSame(manager.getHabit(), habit);
     }
 }

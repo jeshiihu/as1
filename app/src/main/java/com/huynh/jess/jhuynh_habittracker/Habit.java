@@ -72,11 +72,8 @@ public class Habit implements Serializable
         return createdDate.matches("\\d{4}-\\d{2}-\\d{2}");
     }
 
-    public String getCreatedDate() throws Exception
+    public String getCreatedDate()
     {
-        if(isValidDate())
-            return createdDate;
-        else
-            throw new RuntimeException();
+        return createdDate;
     }
 }

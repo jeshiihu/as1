@@ -28,6 +28,22 @@ public class DaysSet implements Serializable
         currentDate = format.format(new Date(System.currentTimeMillis()));
     }
 
+    @Override
+    public String toString()
+    {
+        //TODO: fix days to sort
+        if(days.isEmpty())
+            return "";
+
+        String daysStr = "";
+        for(Day d : days)
+        {
+            daysStr += d.name() + ", ";
+        }
+
+        return daysStr;
+    }
+
     public void setCurrentDateByDate(Date date)
     {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
