@@ -11,19 +11,15 @@ import java.util.Date;
 
 public class HabitList {
     private ArrayList<Habit> list;
-    protected ArrayList<Listener> listeners;
 
     public HabitList()
     {
         list = new ArrayList<Habit>();
-        listeners = new ArrayList<Listener>();
     }
 
     public HabitList(ArrayList<Habit> listHabit)
     {
         list = listHabit;
-        listeners = new ArrayList<Listener>();
-        notifyListeners();
     }
 
     public Collection<Habit> getHabits()
@@ -33,7 +29,6 @@ public class HabitList {
 
     public void addHabit(Habit habit) {
         list.add(habit);
-        notifyListeners();
     }
 
     public int size() {
@@ -54,14 +49,12 @@ public class HabitList {
 
     public void removeHabit(Habit habit){
         list.remove(habit);
-        notifyListeners();
     }
 
     public void removeHabit(int selectedIndex) {
         try
         {
             list.remove(selectedIndex);
-            notifyListeners();
         }
         catch (IndexOutOfBoundsException e)
         {
@@ -101,31 +94,4 @@ public class HabitList {
 
         return todayList;
     }
-
-    private ArrayList<Listener> getListeners() {
-        if (listeners == null ) {
-            listeners = new ArrayList<Listener>();
-        }
-        return listeners;
-    }
-
-    public void notifyListeners()
-    {
-        for(Listener l : getListeners())
-        {
-            l.update();
-        }
-    }
-
-    public void addListener(Listener l)
-    {
-        listeners.add(l);
-        int i = 0;
-    }
-
-    public void removeListener(Listener l)
-    {
-        listeners.remove(l);
-    }
-
 }

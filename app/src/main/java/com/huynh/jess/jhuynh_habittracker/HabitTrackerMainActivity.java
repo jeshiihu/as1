@@ -36,7 +36,8 @@ public class HabitTrackerMainActivity extends AppCompatActivity
         title.setText(format.format(new Date(System.currentTimeMillis())));
 
         ImageButton addButton = (ImageButton)findViewById(R.id.btn_addHabit);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -81,6 +82,8 @@ public class HabitTrackerMainActivity extends AppCompatActivity
         super.onResume();
         HabitTrackerManager.loadFromFile(this);
         updateView("");
+
+        HabitTrackerManager.saveHabitList(this);
     }
 
     protected void updateView(String view)

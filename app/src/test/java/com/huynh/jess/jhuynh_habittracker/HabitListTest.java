@@ -46,41 +46,4 @@ public class HabitListTest {
         assertTrue("Habit List Size is incorrect", list.size() == 0);
         assertFalse("Habit is still contained", list.contains(habit));
     }
-
-    Boolean updated = Boolean.FALSE;
-    @Test
-    public void notifyListeners() {
-        HabitList habitList = new HabitList();
-        updated = Boolean.FALSE;
-        Listener l = new Listener() {
-            public void update() {
-                HabitListTest.this.updated = true;
-            }
-        };
-
-        habitList.addListener(l);
-        Habit habit = new Habit();
-        habitList.addHabit(habit);
-        assertTrue("No update on add", this.updated);
-
-        updated = false;
-        habitList.removeHabit(habit);
-        assertTrue("no update from remove", this.updated);
-    }
-
-    @Test
-    public void testRemoveListeners() {
-        HabitList habitList = new HabitList();
-        updated = Boolean.FALSE;
-        Listener l = new Listener() {
-            public void update() {
-                HabitListTest.this.updated = true;
-            }
-        };
-
-        habitList.addListener(l);
-        habitList.removeListener(l);
-        habitList.addHabit(new Habit());
-        assertFalse("updated listener when it was removed", this.updated);
-    }
 }

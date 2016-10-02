@@ -50,7 +50,7 @@ public class HabitTrackerManager {
         return habitsList;
     }
 
-    public void saveHabitList(Context context)
+    static public void saveHabitList(Context context)
     {
         try
         {
