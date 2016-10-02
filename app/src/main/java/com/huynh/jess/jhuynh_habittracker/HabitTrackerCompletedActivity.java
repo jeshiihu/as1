@@ -32,17 +32,6 @@ public class HabitTrackerCompletedActivity extends AppCompatActivity
 
         TextView repeatedDays = (TextView)findViewById(R.id.completeView_repeatDays);
         repeatedDays.setText(completedHabit.getRepeatedDays());
-
-        updateCounts();
-    }
-
-    private void updateCounts() // update the daily and total count
-    {
-        TextView dailyCompletions = (TextView)findViewById(R.id.singleView_dailyCompletions);
-        dailyCompletions.setText(completedHabit.getDailyCompletions());
-
-        TextView totalCompletions = (TextView)findViewById(R.id.singleView_totalCompletions);
-        totalCompletions.setText(completedHabit.getTotalCompletions());
     }
 
     public void onBtnClickDelete(View view)

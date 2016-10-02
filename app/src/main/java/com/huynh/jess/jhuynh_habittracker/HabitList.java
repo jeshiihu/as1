@@ -44,6 +44,9 @@ public class HabitList {
 
     public void removeHabit(Habit habit)
     {
+        if(list.remove(habit))
+            return;
+
         for(Habit h: list)
         {
             if(h.getTitle().equals(habit.getTitle()) && h.getCreatedDate().equals(habit.getCreatedDate()) &&

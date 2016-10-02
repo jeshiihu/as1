@@ -12,8 +12,6 @@ public class CompletedHabit implements Serializable
 {
     private String habitTitle;
     private String repeatedDays;
-    private String dailyCompletions;
-    private String totalCompletions;
     private Date  completeDate;
 
     public CompletedHabit(Habit habit)
@@ -21,8 +19,6 @@ public class CompletedHabit implements Serializable
         completeDate = new Date(System.currentTimeMillis());
         habitTitle = habit.getTitle();
         repeatedDays = habit.getDays().toString();
-        dailyCompletions = Integer.toString(habit.getCompletedHabits().getDailyCompletionsCount()+1);
-        totalCompletions = Integer.toString(habit.getCompletedHabits().getTotalCompletionCount()+1);
     }
 
     @Override
@@ -54,13 +50,5 @@ public class CompletedHabit implements Serializable
 
     public String getRepeatedDays() {
         return repeatedDays;
-    }
-
-    public String getDailyCompletions() {
-        return dailyCompletions;
-    }
-
-    public String getTotalCompletions() {
-        return totalCompletions;
     }
 }

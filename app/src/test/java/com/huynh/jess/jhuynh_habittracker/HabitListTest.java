@@ -39,7 +39,7 @@ public class HabitListTest {
     public void removeHabit()
     {
         HabitList list = new HabitList();
-        Habit habit = new Habit();
+        Habit habit = new Habit("Clean");
         list.addHabit(habit);
         list.removeHabit(habit);
 

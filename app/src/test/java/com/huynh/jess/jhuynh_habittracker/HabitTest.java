@@ -3,6 +3,11 @@ package com.huynh.jess.jhuynh_habittracker;
 import android.nfc.FormatException;
 
 import org.junit.Test;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -47,5 +52,14 @@ public class HabitTest {
         assert(days.isDayContained(DaysSet.Day.Monday));
         assert(days.isDayContained(DaysSet.Day.Wednesday));
         assert(days.isDayContained(DaysSet.Day.Thursday));
+    }
+
+    @Test
+    public void setCreatedDate()
+    {
+        Habit habit = new Habit();
+        Date d = new Date(System.currentTimeMillis());
+        habit.setCreatedDateByStr(d.toString());
+        assert(habit.getCreatedDate().equals(d.toString()));
     }
 }
