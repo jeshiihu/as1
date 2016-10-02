@@ -17,7 +17,6 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
 {
     private int selected;
     private Habit habit;
-    private Boolean allHabits = Boolean.FALSE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,12 +26,12 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
 
         selected = (int)getIntent().getExtras().getSerializable("index");
         String view = (String)getIntent().getExtras().getSerializable("viewAllOrToday");
+
+        // this can be called by either the daily view or all view so we cannot get index wrong!
         if(!view.equals("All Habits"))
             habit = HabitTrackerManager.getHabitList().getTodaysHabits().getHabit(selected);
-        else {
-            allHabits = Boolean.TRUE;
+        else
             habit = HabitTrackerManager.getHabitList().getHabit(selected);
-        }
 
         TextView title = (TextView)findViewById(R.id.singleView_habitTitle);
         title.setText(habit.toString());
@@ -45,7 +44,7 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
 
         updateCounts();
 
-        if(habit.isHabitCompletedToday())
+        if(habit.isHabitCompletedToday()) // toggling the colour red or green is completed
         {
             ImageButton completeBtn = (ImageButton)findViewById(R.id.btn_completeHabit);
             completeBtn.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.btn_complete_green));
@@ -68,6 +67,7 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
         totalCompletions.setText(Integer.toString(total));
     }
 
+    // add to the counter and make the icon green
     public void onBtnClickComplete(View view)
     {
         habit.completeHabit();
@@ -79,7 +79,7 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
         HabitTrackerManager.saveHabitList();
     }
 
-    public void onBtnClickDelete(View view)
+    public void onBtnClickDelete(View view) // warning to ensure the user did not accidently press delete
     {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(HabitTrackerSingleActivity.this);
         alertBuilder.setMessage("Are you sure you want to delete this habit?");

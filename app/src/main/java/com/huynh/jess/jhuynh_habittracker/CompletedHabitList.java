@@ -33,11 +33,6 @@ public class CompletedHabitList implements Serializable
         list.remove(habit);
     }
 
-    public void removeCompletedHabit(int i)
-    {
-        list.remove(i);
-    }
-
     public int getTotalCompletionCount()
     {
         return list.size();

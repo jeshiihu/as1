@@ -36,7 +36,7 @@ public class HabitTrackerCompletedActivity extends AppCompatActivity
         updateCounts();
     }
 
-    private void updateCounts()
+    private void updateCounts() // update the daily and total count
     {
         TextView dailyCompletions = (TextView)findViewById(R.id.singleView_dailyCompletions);
         dailyCompletions.setText(completedHabit.getDailyCompletions());

@@ -2,8 +2,6 @@ package com.huynh.jess.jhuynh_habittracker;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,13 +17,10 @@ public class DaysSet implements Serializable
     }
 
     private Set<Day> days;
-    private String   currentDate;
 
     public DaysSet()
     {
         days = new HashSet<Day>();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        currentDate = format.format(new Date(System.currentTimeMillis()));
     }
 
     @Override
@@ -41,25 +36,6 @@ public class DaysSet implements Serializable
         }
 
         return daysStr;
-    }
-
-    public void setCurrentDateByDate(Date date)
-    {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        currentDate = format.format(date);
-    }
-
-    public void setCurrentDateByStr(String dateStr) throws Exception
-    {
-        if(dateStr.matches("\\d{4}-\\d{2}-\\d{2}"))
-            currentDate = dateStr;
-        else
-            throw new IllegalArgumentException();
-    }
-
-    public String getCurrentDate()
-    {
-        return currentDate;
     }
 
     public void addDay(Day day)
@@ -90,7 +66,6 @@ public class DaysSet implements Serializable
         }
 
     }
-
 
     public int size()
     {

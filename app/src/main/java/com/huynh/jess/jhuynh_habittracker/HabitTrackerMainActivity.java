@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,23 +36,21 @@ public class HabitTrackerMainActivity extends AppCompatActivity
         SimpleDateFormat format = new SimpleDateFormat("EEEE");
         title.setText(format.format(new Date(System.currentTimeMillis())));
 
-        ImageButton addButton = (ImageButton)findViewById(R.id.btn_addHabit);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
                 Intent intent;
-                if(title.getText().equals("History"))
+                if(title.getText().equals("History")) // need to open the completed activity
                     intent = new Intent(HabitTrackerMainActivity.this, HabitTrackerCompletedActivity.class);
                 else
-                {
+                {   // need to open the single activity
                     intent = new Intent(HabitTrackerMainActivity.this, HabitTrackerSingleActivity.class);
                     intent.putExtra("viewAllOrToday", title.getText());
                 }
 
                 intent.putExtra("index", i);
-
                 startActivity(intent);
             }
         });
@@ -73,8 +70,6 @@ public class HabitTrackerMainActivity extends AppCompatActivity
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                String item = parent.getSelectedItem().toString();
-                updateView(item);
             }
         });
     }
@@ -87,6 +82,7 @@ public class HabitTrackerMainActivity extends AppCompatActivity
         updateView("");
     }
 
+    // update the view based on what a user has selected with the spinner
     protected void updateView(String view)
     {
         SimpleDateFormat format = new SimpleDateFormat("EEEE");

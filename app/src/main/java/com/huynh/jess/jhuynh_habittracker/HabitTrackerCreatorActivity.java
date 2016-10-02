@@ -1,6 +1,5 @@
 package com.huynh.jess.jhuynh_habittracker;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -46,7 +45,7 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
         if(!manager.isValidRepeatSelection())
             Toast.makeText(this, "Please select at least one repeat day", Toast.LENGTH_SHORT).show();
         else
-        {
+        {   // valid habit so add to the list!
             HabitTrackerManager.getHabitList().addHabit(manager.generateCreatedHabit());
             HabitTrackerManager.saveHabitList();
             setResult(RESULT_OK);
@@ -60,6 +59,7 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
         finish();
     }
 
+    // ---------------- these toggle the selection on and off ----------------
     public void onCtnClickMon(View view)
     {
         Button btnMon = (Button)findViewById(R.id.btn_monday);

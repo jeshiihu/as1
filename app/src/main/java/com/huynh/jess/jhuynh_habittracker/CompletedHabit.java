@@ -1,12 +1,8 @@
 package com.huynh.jess.jhuynh_habittracker;
 
-import java.io.InterruptedIOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.InputMismatchException;
-import java.util.Map;
 
 /**
  * Created by Jess on 2016-09-26.
