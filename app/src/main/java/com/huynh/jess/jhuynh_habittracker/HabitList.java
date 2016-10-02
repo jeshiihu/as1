@@ -17,11 +17,6 @@ public class HabitList {
         list = new ArrayList<Habit>();
     }
 
-    public HabitList(ArrayList<Habit> listHabit)
-    {
-        list = listHabit;
-    }
-
     public Collection<Habit> getHabits()
     {
         return list;
@@ -47,27 +42,20 @@ public class HabitList {
         return list.contains(habit);
     }
 
-    public void removeHabit(Habit habit){
-        list.remove(habit);
-    }
-
-    public void removeHabit(int selectedIndex) {
-        try
-        {
-            list.remove(selectedIndex);
-        }
-        catch (IndexOutOfBoundsException e)
-        {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    public void removeAll()
+    public void removeHabit(Habit habit)
     {
-        list.clear();
+        for(Habit h: list)
+        {
+            if(h.getTitle().equals(habit.getTitle()) && h.getCreatedDate().equals(habit.getCreatedDate()) &&
+                    h.getDays().toString().equals(habit.getDays().toString()))
+            {
+                list.remove(h);
+                break;
+            }
+        }
     }
 
-    public CompletedHabitList getHabitCompletions()
+    public CompletedHabitList getHabitCompletions() // only a copy of all of them
     {
         CompletedHabitList completedList = new CompletedHabitList();
 
@@ -76,6 +64,7 @@ public class HabitList {
             for(CompletedHabit ch : h.getCompletedHabits().getList())
                 completedList.addCompletedHabit(ch);
         }
+        completedList.sort();
 
         return completedList;
     }
@@ -93,5 +82,23 @@ public class HabitList {
         }
 
         return todayList;
+    }
+
+    public void removeCompletedHabit(CompletedHabit c)
+    {
+        for(Habit h: list)
+        {
+            if(h.getTitle().equals(c.getHabitTitle()))
+            {
+                for(CompletedHabit completed : h.getCompletedHabits().getList())
+                {
+                    if(completed.getCompletionDateTime().equals(c.getCompletionDateTime()))
+                    {
+                        h.getCompletedHabits().removeCompletedHabit(completed);
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

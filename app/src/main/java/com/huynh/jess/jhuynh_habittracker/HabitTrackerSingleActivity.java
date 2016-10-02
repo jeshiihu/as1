@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 public class HabitTrackerSingleActivity extends AppCompatActivity
 {
-    Habit habit;
+    private int selected;
+    private Habit habit;
+    private Boolean allHabits = Boolean.FALSE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -23,12 +25,14 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_tracker_single);
 
-        int selected = (int)getIntent().getExtras().getSerializable("index");
-        String str = (String)getIntent().getExtras().getSerializable("viewAllOrToday");
-        if(!str.equals("All Habits"))
-            habit = HabitTrackerManager.getHabitList(this).getTodaysHabits().getHabit(selected);
-        else
-            habit = HabitTrackerManager.getHabitList(this).getHabit(selected);
+        selected = (int)getIntent().getExtras().getSerializable("index");
+        String view = (String)getIntent().getExtras().getSerializable("viewAllOrToday");
+        if(!view.equals("All Habits"))
+            habit = HabitTrackerManager.getHabitList().getTodaysHabits().getHabit(selected);
+        else {
+            allHabits = Boolean.TRUE;
+            habit = HabitTrackerManager.getHabitList().getHabit(selected);
+        }
 
         TextView title = (TextView)findViewById(R.id.singleView_habitTitle);
         title.setText(habit.toString());
@@ -72,6 +76,7 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
         completeBtn.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.btn_complete_green));
 
         updateCounts();
+        HabitTrackerManager.saveHabitList();
     }
 
     public void onBtnClickDelete(View view)
@@ -85,7 +90,8 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
             public void onClick(DialogInterface dialog, int id)
             {
                 dialog.cancel();
-                HabitTrackerManager.getHabitList(HabitTrackerSingleActivity.this).removeHabit(habit);
+                HabitTrackerManager.getHabitList().removeHabit(habit);
+                HabitTrackerManager.saveHabitList();
                 finish();
             }
         });

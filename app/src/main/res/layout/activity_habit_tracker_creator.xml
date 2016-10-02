@@ -19,16 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"/>
 
-    <TextView
-        android:id="@+id/textView_editorDate"
-        android:text="TODO: fill date text here"
-        android:textSize="15dp"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textView_editorTitle"
-        android:layout_centerHorizontal="true"/>
-
     <!--HABIT TITLE-->
     <TextView
         android:id="@+id/textView_habitTitle"
@@ -38,7 +28,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView_editorDate"
+        android:layout_below="@id/textView_editorTitle"
         android:layout_alignParentLeft="true"/>
 
     <EditText

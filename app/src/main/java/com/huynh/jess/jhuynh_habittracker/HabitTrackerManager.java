@@ -20,21 +20,19 @@ import java.lang.reflect.Type;
 
 public class HabitTrackerManager {
     private static final String FILENAME = "habit_tracker.sav";
-    private static HabitList habitsList = null;
+    private static HabitList habitsList = new HabitList();
+    private static Context context;
 
-    static public HabitList getHabitList(Context context)
+    static public HabitList getHabitList()
     {
-        if(habitsList == null)
+        try
         {
-            try
-            {
-                habitsList = loadFromFile(context);
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-                throw new RuntimeException();
-            }
+            habitsList = loadFromFile();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException();
         }
 
         return habitsList;
@@ -45,12 +43,12 @@ public class HabitTrackerManager {
         habitsList = new HabitList();
     }
 
-    public HabitList getHabitList()
+    static public void setContext(Context c)
     {
-        return habitsList;
+        context = c;
     }
 
-    static public void saveHabitList(Context context)
+    static public void saveHabitList()
     {
         try
         {
@@ -72,7 +70,7 @@ public class HabitTrackerManager {
         }
     }
 
-    static public HabitList loadFromFile(Context context)
+    static public HabitList loadFromFile()
     {
         try
         {
@@ -93,4 +91,5 @@ public class HabitTrackerManager {
             throw new RuntimeException();
         }
     }
+
 }

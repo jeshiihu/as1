@@ -31,7 +31,6 @@ public class DaysSet implements Serializable
     @Override
     public String toString()
     {
-        //TODO: fix days to sort
         if(days.isEmpty())
             return "";
 

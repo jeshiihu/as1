@@ -47,10 +47,8 @@ public class HabitTrackerCreatorActivity extends AppCompatActivity
             Toast.makeText(this, "Please select at least one repeat day", Toast.LENGTH_SHORT).show();
         else
         {
-            HabitTrackerManager.getHabitList(this).addHabit(manager.generateCreatedHabit());
-
-            Intent returnIntent = new Intent();
-            returnIntent.putExtra("newHabit", manager.generateCreatedHabit());
+            HabitTrackerManager.getHabitList().addHabit(manager.generateCreatedHabit());
+            HabitTrackerManager.saveHabitList();
             setResult(RESULT_OK);
             finish();
         }

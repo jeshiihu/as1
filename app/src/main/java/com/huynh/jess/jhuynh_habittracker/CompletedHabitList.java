@@ -33,16 +33,9 @@ public class CompletedHabitList implements Serializable
         list.remove(habit);
     }
 
-    public void removeCompletedHabit(int index) throws Exception
+    public void removeCompletedHabit(int i)
     {
-        try
-        {
-            list.remove(index);
-        }
-        catch(IndexOutOfBoundsException e)
-        {
-            throw new IndexOutOfBoundsException();
-        }
+        list.remove(i);
     }
 
     public int getTotalCompletionCount()
@@ -68,5 +61,31 @@ public class CompletedHabitList implements Serializable
     public CompletedHabit getAt(int index)
     {
         return list.get(index);
+    }
+
+    public void sort()
+    {
+        ArrayList<CompletedHabit> sorted = new ArrayList<CompletedHabit>();
+
+        for(CompletedHabit h : list)
+        {
+            int size = sorted.size();
+            if(size == 0)
+                sorted.add(h);
+            else
+            {
+                if(sorted.get(size - 1).getDate().after(h.getDate()))
+                {
+                    CompletedHabit temp = sorted.get(size - 1);
+                    sorted.remove(size - 1);
+                    sorted.add(h);
+                    sorted.add(temp);
+                }
+                else
+                    sorted.add(h);
+            }
+        }
+
+        list = sorted;
     }
 }

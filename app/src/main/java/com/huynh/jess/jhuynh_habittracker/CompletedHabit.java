@@ -25,14 +25,14 @@ public class CompletedHabit implements Serializable
         completeDate = new Date(System.currentTimeMillis());
         habitTitle = habit.getTitle();
         repeatedDays = habit.getDays().toString();
-        dailyCompletions = Integer.toString(habit.getCompletedHabits().getDailyCompletionsCount());
-        totalCompletions = Integer.toString(habit.getCompletedHabits().getTotalCompletionCount());
+        dailyCompletions = Integer.toString(habit.getCompletedHabits().getDailyCompletionsCount()+1);
+        totalCompletions = Integer.toString(habit.getCompletedHabits().getTotalCompletionCount()+1);
     }
 
     @Override
     public String toString()
     {
-        return habitTitle + "\nCompleted on:" + getCompletionDateTime();
+        return habitTitle + "\n" + getCompletionDateTime();
     }
 
     public String getCompletionDate()
@@ -45,6 +45,11 @@ public class CompletedHabit implements Serializable
     {
         SimpleDateFormat format = new SimpleDateFormat("EEE yyyy-MM-dd, hh:mm::ss");
         return format.format(completeDate);
+    }
+
+    public Date getDate()
+    {
+        return completeDate;
     }
 
     public String getHabitTitle() {

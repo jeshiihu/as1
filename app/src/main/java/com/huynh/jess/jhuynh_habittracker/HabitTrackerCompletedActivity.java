@@ -22,7 +22,7 @@ public class HabitTrackerCompletedActivity extends AppCompatActivity
         setContentView(R.layout.activity_habit_tracker_complete);
 
         int selected = (int)getIntent().getExtras().getSerializable("index");
-        completedHabit = HabitTrackerManager.getHabitList(this).getHabitCompletions().getAt(selected);
+        completedHabit = HabitTrackerManager.getHabitList().getHabitCompletions().getAt(selected);
 
         TextView title = (TextView)findViewById(R.id.completeView_habitTitle);
         title.setText(completedHabit.getHabitTitle());
@@ -56,7 +56,8 @@ public class HabitTrackerCompletedActivity extends AppCompatActivity
             public void onClick(DialogInterface dialog, int id)
             {
                 dialog.cancel();
-                HabitTrackerManager.getHabitList(HabitTrackerCompletedActivity.this).getHabitCompletions().removeCompletedHabit(completedHabit);
+                HabitTrackerManager.getHabitList().removeCompletedHabit(completedHabit);
+                HabitTrackerManager.saveHabitList();
                 finish();
             }
         });

@@ -22,12 +22,14 @@ public class HabitTrackerMainActivity extends AppCompatActivity
 {
     private ListView listView;
     private TextView title;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_tracker_main);
+        HabitTrackerManager.setContext(this);
 
         listView = (ListView)findViewById(R.id.habitListView);
 
@@ -56,7 +58,7 @@ public class HabitTrackerMainActivity extends AppCompatActivity
             }
         });
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerView);
+        spinner = (Spinner) findViewById(R.id.spinnerView);
         ArrayAdapter<CharSequence> adapterSpinner = ArrayAdapter.createFromResource(this, R.array.spinner_views, android.R.layout.simple_spinner_item);
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapterSpinner);
@@ -71,7 +73,8 @@ public class HabitTrackerMainActivity extends AppCompatActivity
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                String item = parent.getSelectedItem().toString();
+                updateView(item);
             }
         });
     }
@@ -80,10 +83,8 @@ public class HabitTrackerMainActivity extends AppCompatActivity
     protected void onResume()
     {
         super.onResume();
-        HabitTrackerManager.loadFromFile(this);
+        spinner.setSelection(0);
         updateView("");
-
-        HabitTrackerManager.saveHabitList(this);
     }
 
     protected void updateView(String view)
@@ -95,7 +96,7 @@ public class HabitTrackerMainActivity extends AppCompatActivity
         {
             title.setText(view);
 
-            Collection<Habit> list = HabitTrackerManager.getHabitList(this).getHabits();
+            Collection<Habit> list = HabitTrackerManager.getHabitList().getHabits();
             ArrayAdapter<Habit> adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, new ArrayList<Habit>(list));
             listView.setAdapter(adapter);
         }
@@ -104,7 +105,7 @@ public class HabitTrackerMainActivity extends AppCompatActivity
         {
             title.setText(view);
 
-            Collection<CompletedHabit> list = HabitTrackerManager.getHabitList(this).getHabitCompletions().getList();
+            Collection<CompletedHabit> list = HabitTrackerManager.getHabitList().getHabitCompletions().getList();
             ArrayAdapter<CompletedHabit> completedAdapter = new ArrayAdapter<CompletedHabit>(this, R.layout.list_item, new ArrayList<CompletedHabit>(list));
             listView.setAdapter(completedAdapter);
         }
@@ -112,7 +113,7 @@ public class HabitTrackerMainActivity extends AppCompatActivity
         {
             title.setText(today);
 
-            Collection<Habit> list = HabitTrackerManager.getHabitList(this).getTodaysHabits().getHabits();
+            Collection<Habit> list = HabitTrackerManager.getHabitList().getTodaysHabits().getHabits();
             ArrayAdapter<Habit>adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, new ArrayList<Habit>(list));
             listView.setAdapter(adapter);
         }
