@@ -64,4 +64,9 @@ public class CompletedHabitList implements Serializable
 
         return counter;
     }
+
+    public CompletedHabit getAt(int index)
+    {
+        return list.get(index);
+    }
 }

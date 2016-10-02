@@ -82,4 +82,18 @@ public class Habit implements Serializable
     {
         return completedHabits;
     }
+
+    public Boolean isHabitCompletedToday()
+    {
+        if(getCompletedHabits().getDailyCompletionsCount() > 0)
+            return Boolean.TRUE;
+
+        return Boolean.FALSE;
+    }
+
+    public void completeHabit()
+    {
+        CompletedHabit newCompletion = new CompletedHabit(this);
+        getCompletedHabits().addCompletedHabit(newCompletion);
+    }
 }

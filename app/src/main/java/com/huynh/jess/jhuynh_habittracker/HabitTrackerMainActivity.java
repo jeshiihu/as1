@@ -13,17 +13,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,12 +39,19 @@ public class HabitTrackerMainActivity extends AppCompatActivity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(!title.equals("History"))
+
+                Intent intent;
+                if(title.getText().equals("History"))
+                    intent = new Intent(HabitTrackerMainActivity.this, HabitTrackerCompletedActivity.class);
+                else
                 {
-                    Intent singleIntent = new Intent(HabitTrackerMainActivity.this, HabitTrackerSingleActivity.class);
-                    singleIntent.putExtra("index", i);
-                    startActivity(singleIntent);
+                    intent = new Intent(HabitTrackerMainActivity.this, HabitTrackerSingleActivity.class);
+                    intent.putExtra("viewAllOrToday", title.getText());
                 }
+
+                intent.putExtra("index", i);
+
+                startActivity(intent);
             }
         });
 
@@ -83,29 +79,20 @@ public class HabitTrackerMainActivity extends AppCompatActivity
     protected void onResume()
     {
         super.onResume();
-        HabitListController.loadFromFile(this);
-        Collection<Habit> list = HabitListController.getHabitList(this).getTodaysHabits().getHabits();
-        ArrayAdapter<Habit>adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, new ArrayList<Habit>(list));
-        listView.setAdapter(adapter);
+        HabitTrackerManager.loadFromFile(this);
+        updateView("");
     }
 
     protected void updateView(String view)
     {
-        if(view.equals("Today's Habits"))
-        {
-            SimpleDateFormat format = new SimpleDateFormat("EEEE");
-            title.setText(format.format(new Date(System.currentTimeMillis())));
+        SimpleDateFormat format = new SimpleDateFormat("EEEE");
+        String today = format.format(new Date(System.currentTimeMillis()));
 
-            Collection<Habit> list = HabitListController.getHabitList(this).getTodaysHabits().getHabits();
-            ArrayAdapter<Habit>adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, new ArrayList<Habit>(list));
-            listView.setAdapter(adapter);
-        }
-        else
         if(view.equals("All Habits"))
         {
             title.setText(view);
 
-            Collection<Habit> list = HabitListController.getHabitList(this).getHabits();
+            Collection<Habit> list = HabitTrackerManager.getHabitList(this).getHabits();
             ArrayAdapter<Habit> adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, new ArrayList<Habit>(list));
             listView.setAdapter(adapter);
         }
@@ -114,9 +101,17 @@ public class HabitTrackerMainActivity extends AppCompatActivity
         {
             title.setText(view);
 
-            Collection<CompletedHabit> list = HabitListController.getHabitList(this).getHabitCompletions().getList();
+            Collection<CompletedHabit> list = HabitTrackerManager.getHabitList(this).getHabitCompletions().getList();
             ArrayAdapter<CompletedHabit> completedAdapter = new ArrayAdapter<CompletedHabit>(this, R.layout.list_item, new ArrayList<CompletedHabit>(list));
             listView.setAdapter(completedAdapter);
+        }
+        else
+        {
+            title.setText(today);
+
+            Collection<Habit> list = HabitTrackerManager.getHabitList(this).getTodaysHabits().getHabits();
+            ArrayAdapter<Habit>adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, new ArrayList<Habit>(list));
+            listView.setAdapter(adapter);
         }
     }
 

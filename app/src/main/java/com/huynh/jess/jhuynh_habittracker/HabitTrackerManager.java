@@ -18,7 +18,7 @@ import java.lang.reflect.Type;
  * Created by Jess on 2016-09-26.
  */
 
-public class HabitListController {
+public class HabitTrackerManager {
     private static final String FILENAME = "habit_tracker.sav";
     private static HabitList habitsList = null;
 
@@ -40,7 +40,7 @@ public class HabitListController {
         return habitsList;
     }
 
-    public HabitListController()
+    public HabitTrackerManager()
     {
         habitsList = new HabitList();
     }

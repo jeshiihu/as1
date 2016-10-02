@@ -18,6 +18,7 @@
 
         <activity android:name=".HabitTrackerCreatorActivity"></activity>
         <activity android:name=".HabitTrackerSingleActivity"></activity>
+        <activity android:name=".HabitTrackerCompletedActivity"></activity>
 
     </application>
 
