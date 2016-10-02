@@ -1,5 +1,6 @@
 # as1: Assignment 1 for CMPUT 301
-Application that is a habit tracker/task tracker, letting a user add, complete, delete, and view histories of their habits/tasks!
+Application that is a habit tracker/task tracker, letting a user add, complete, delete, and view histories of their habits/tasks! <br/>
+Demo: https://www.youtube.com/watch?v=wjFkF8XZtP8&feature=youtu.be <br/>
 
 Some Notes: <br/>
 - a user will always see the current days view on start and can switch to all habits or history
@@ -7,7 +8,7 @@ Some Notes: <br/>
 - users may delete an instance of a completion by deleting it in the history view 
 - if a user completed a habit that is not on the previous day, they may undo it by deleting the completion
 
-Enjoy!
+Enjoy! <br/>
 
 
 Github Sources:
