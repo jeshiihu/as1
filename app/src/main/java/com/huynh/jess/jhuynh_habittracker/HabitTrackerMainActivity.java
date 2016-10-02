@@ -109,7 +109,8 @@ public class HabitTrackerMainActivity extends AppCompatActivity
         {
             title.setText(today);
 
-            Collection<Habit> list = HabitTrackerManager.getHabitList().getTodaysHabits().getHabits();
+            Collection<Habit> list = list = HabitTrackerManager.getHabitList().getTodaysHabits().getHabits();
+
             ArrayAdapter<Habit>adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, new ArrayList<Habit>(list));
             listView.setAdapter(adapter);
         }

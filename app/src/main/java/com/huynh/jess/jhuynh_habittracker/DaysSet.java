@@ -34,6 +34,7 @@ public class DaysSet implements Serializable
         {
             daysStr += d.name() + ", ";
         }
+        daysStr = daysStr.substring(0, daysStr.length()-2);
 
         return daysStr;
     }

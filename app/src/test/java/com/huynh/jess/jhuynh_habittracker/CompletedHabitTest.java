@@ -35,7 +35,7 @@ public class CompletedHabitTest
     public void testHabitDays()
     {
         CompletedHabit c = new CompletedHabit(initTestHabit());
-        assert(c.getRepeatedDays().equals("Monday, "));
+        assert(c.getRepeatedDays().equals("Monday"));
     }
 
     @Test

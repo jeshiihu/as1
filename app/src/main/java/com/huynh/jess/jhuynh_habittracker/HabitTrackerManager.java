@@ -45,15 +45,10 @@ public class HabitTrackerManager {
 
     static public HabitList getHabitList()
     {
-        try
-        {
-            habitsList = loadFromFile();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
+        habitsList = loadFromFile();
+
+        if(habitsList == null)
+            return new HabitList();
 
         return habitsList;
     }
@@ -61,6 +56,16 @@ public class HabitTrackerManager {
     public HabitTrackerManager()
     {
         habitsList = new HabitList();
+    }
+
+    static public void addHabit(Habit habit)
+    {
+        if(habitsList == null)
+        {
+            habitsList = new HabitList();
+        }
+
+        habitsList.addHabit(habit);
     }
 
     static public void setContext(Context c)
