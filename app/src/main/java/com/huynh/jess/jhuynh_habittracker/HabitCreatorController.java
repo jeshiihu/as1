@@ -6,14 +6,14 @@ import java.util.Date;
 /**
  * Created by Jess on 2016-09-29.
  */
-public class HabitCreatorManager
+public class HabitCreatorController
 {
 
     private String habitTitle = "";
     private String creationDate = "";
     private DaysSet days = new DaysSet();
 
-    public HabitCreatorManager()
+    public HabitCreatorController()
     {
         setCreatedDateByDate(new Date(System.currentTimeMillis()));
     }

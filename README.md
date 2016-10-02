@@ -26,8 +26,8 @@ Sept. 24, 2016: Persistent data, arrayadapter and list view, save/ load file <br
 
 Stack Overflow Sources: Licensed cc by-sa 3.0, Attribution required
 --------------------------------------------------------------
-Sept 22, 2016: Tokenizing to GSON <b />
-	Answer by User: Alex, http://stackoverflow.com/users/20634/alex <b/ >
+Sept 22, 2016: Tokenizing to GSON <br />
+	Answer by User: Alex, http://stackoverflow.com/users/20634/alex <br/ >
 	Question: http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt <br />
 
 

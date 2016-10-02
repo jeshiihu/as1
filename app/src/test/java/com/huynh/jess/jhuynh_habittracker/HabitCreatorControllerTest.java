@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -12,12 +11,12 @@ import static org.junit.Assert.*;
  * Created by Jess on 2016-09-29.
  */
 
-public class HabitCreatorManagerTest
+public class HabitCreatorControllerTest
 {
     @Test
     public void testSetTitle()
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         manager.setTitle("Eat a cookie");
 
         assertSame(manager.getTitle(),"Eat a cookie");
@@ -26,7 +25,7 @@ public class HabitCreatorManagerTest
     @Test
     public void testSetDateByDate() throws Exception
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = format.parse("2016-01-13");
         manager.setCreatedDateByDate(date);
@@ -37,7 +36,7 @@ public class HabitCreatorManagerTest
     @Test
     public void testSetDateByStringValid()
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         manager.setCreatedDateByStr("2013-09-20");
         assert(manager.getCreatedDate().equals("2013-09-20"));
     }
@@ -45,7 +44,7 @@ public class HabitCreatorManagerTest
     @Test
     public void testSetDateByStringInvalid() throws Exception
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         manager.setCreatedDateByStr("2013-09-80000");
         assert(manager.getCreatedDate().equals("2013-09-80000"));
     }
@@ -53,7 +52,7 @@ public class HabitCreatorManagerTest
     @Test
     public void testSetDateByStringInvalidAlpha() throws Exception
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         manager.setCreatedDateByStr("2l13-09-08");
         assert(manager.getCreatedDate().equals("2l13-09-08"));
     }
@@ -61,14 +60,14 @@ public class HabitCreatorManagerTest
     @Test // since we tested DaysSet we know what ever we call from it will work, hopefully!
     public void testGetDaySetEmpty()
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         assert(manager.getDaysSet().isEmpty());
     }
 
     @Test // since we tested DaysSet we know what ever we call from it will work, hopefully!
     public void testSetDaySet()
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         DaysSet days = new DaysSet();
         manager.setDaysSet(days);
 
@@ -78,14 +77,14 @@ public class HabitCreatorManagerTest
     @Test
     public void isValidTitleInvalid()
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         assertFalse(manager.isValidTitle());
     }
 
     @Test
     public void isValidTitleValid()
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         manager.setTitle("Clean");
 
         assert(manager.isValidTitle());
@@ -94,7 +93,7 @@ public class HabitCreatorManagerTest
     @Test
     public void isValidDateInvalid()
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         manager.setCreatedDateByStr("20166-09-28");
 
         assertFalse(manager.isValidDate());
@@ -103,7 +102,7 @@ public class HabitCreatorManagerTest
     @Test
     public void isValidDateInvalidAlpha()
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         manager.setCreatedDateByStr("2000-a9-29");
         assertFalse(manager.isValidDate());
     }
@@ -111,7 +110,7 @@ public class HabitCreatorManagerTest
     @Test
     public void isValidDateValid()
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         manager.setCreatedDateByStr("2016-09-28");
         assert(manager.isValidDate());
     }
@@ -119,7 +118,7 @@ public class HabitCreatorManagerTest
     @Test
     public void isValidRepeatSelectionInvalid()
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         DaysSet days = new DaysSet();
         manager.setDaysSet(days);
 
@@ -129,7 +128,7 @@ public class HabitCreatorManagerTest
     @Test
     public void isValidRepeatSelectionValid()
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         DaysSet days = new DaysSet();
         days.addDay(DaysSet.Day.Monday);
         days.addDay(DaysSet.Day.Saturday);
@@ -140,7 +139,7 @@ public class HabitCreatorManagerTest
 
     public void generateCreatedHabit() throws Exception
     {
-        HabitCreatorManager manager = new HabitCreatorManager();
+        HabitCreatorController manager = new HabitCreatorController();
         manager.setTitle("clean");
         manager.setCreatedDateByStr("1995-12-13");
         manager.getDaysSet().addDay(DaysSet.Day.Monday);
