@@ -6,20 +6,10 @@ package com.huynh.jess.jhuynh_habittracker;
 public class HabitSingleManager
 {
     private Habit passedInHabit;
-    private CompletedHabit completedHabit;
-    private Boolean habitCompleted = Boolean.FALSE;
 
     public HabitSingleManager(Habit habit)
     {
         passedInHabit = habit;
-    }
-
-    public CompletedHabit getCompletedHabit() throws Exception
-    {
-        if(!habitCompleted)
-            throw new RuntimeException();
-
-        return completedHabit;
     }
 
     public Habit getHabit()
@@ -27,21 +17,17 @@ public class HabitSingleManager
         return passedInHabit;
     }
 
-    public Boolean isHabitCompleted()
+    public Boolean isHabitCompletedToday()
     {
-        return habitCompleted;
+        if(passedInHabit.getCompletedHabits().getDailyCompletionsCount() > 0)
+            return Boolean.TRUE;
+
+        return Boolean.FALSE;
     }
 
     public void completeHabit()
     {
-        if(!habitCompleted)
-        {
-            completedHabit = new CompletedHabit(passedInHabit);
-            completedHabit.complete();
-        }
-        else
-        {
-            
-        }
+        CompletedHabit newCompletion = new CompletedHabit(passedInHabit.getTitle(), passedInHabit.getCreatedDate());
+        passedInHabit.getCompletedHabits().addCompletedHabit(newCompletion);
     }
 }

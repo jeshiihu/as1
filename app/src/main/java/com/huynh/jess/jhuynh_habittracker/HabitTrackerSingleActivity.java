@@ -17,7 +17,6 @@ import android.widget.TextView;
 public class HabitTrackerSingleActivity extends AppCompatActivity
 {
     private HabitSingleManager manager;
-    private final String DELETE_ACTION = "delete";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,8 +24,8 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_tracker_single);
 
-        Habit habit = (Habit)getIntent().getExtras().getSerializable("habit");
-        manager = new HabitSingleManager(habit);
+        int selected = (int)getIntent().getExtras().getSerializable("index");
+        manager = new HabitSingleManager(HabitListController.getHabitList(this).getHabit(selected));
 
         TextView title = (TextView)findViewById(R.id.singleView_habitTitle);
         title.setText(manager.getHabit().toString());
@@ -36,20 +35,49 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
 
         TextView repeatedDays = (TextView)findViewById(R.id.singleView_repeatDays);
         repeatedDays.setText(manager.getHabit().getDays().toString());
+
+        updateCounts();
+
+        if(manager.isHabitCompletedToday())
+        {
+            ImageButton completeBtn = (ImageButton)findViewById(R.id.btn_completeHabit);
+            completeBtn.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.btn_complete_green));
+        }
+        else
+        {
+            ImageButton completeBtn = (ImageButton)findViewById(R.id.btn_completeHabit);
+            completeBtn.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.btn_complete));
+        }
+    }
+
+    private void updateCounts()
+    {
+        TextView dailyCompletions = (TextView)findViewById(R.id.singleView_dailyCompletions);
+        int daily = manager.getHabit().getCompletedHabits().getDailyCompletionsCount();
+        dailyCompletions.setText(Integer.toString(daily));
+
+        TextView totalCompletions = (TextView)findViewById(R.id.singleView_totalCompletions);
+        int total = manager.getHabit().getCompletedHabits().getTotalCompletionCount();
+        totalCompletions.setText(Integer.toString(total));
     }
 
     private void leaveView(String buttonPressed)
     {
         Intent returnIntent = new Intent();
         returnIntent.putExtra("actionType", buttonPressed);
+        returnIntent.putExtra("habit", manager.getHabit());
         setResult(RESULT_OK, returnIntent);
         finish();
     }
 
     public void onBtnClickComplete(View view)
     {
+        manager.completeHabit();
+
         ImageButton completeBtn = (ImageButton)findViewById(R.id.btn_completeHabit);
         completeBtn.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.btn_complete_green));
+
+        updateCounts();
     }
 
     public void onBtnClickDelete(View view)
@@ -63,7 +91,8 @@ public class HabitTrackerSingleActivity extends AppCompatActivity
             public void onClick(DialogInterface dialog, int id)
             {
                 dialog.cancel();
-                leaveView(DELETE_ACTION);
+                HabitListController.getHabitList(HabitTrackerSingleActivity.this).removeHabit(manager.getHabit());
+                finish();
             }
         });
 

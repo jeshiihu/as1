@@ -19,6 +19,7 @@ public class Habit implements Serializable
     private String  habitTitle;
     private DaysSet setOfDays;
     private String  createdDate;
+    private CompletedHabitList completedHabits = new CompletedHabitList();
 
     public Habit()
     {
@@ -75,5 +76,10 @@ public class Habit implements Serializable
     public String getCreatedDate()
     {
         return createdDate;
+    }
+
+    public CompletedHabitList getCompletedHabits()
+    {
+        return completedHabits;
     }
 }

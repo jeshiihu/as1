@@ -66,6 +66,48 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"/>
 
+    <TextView
+        android:id="@+id/singleView_dailyCompletionsTitle"
+        android:text="@string/daily_completions"
+        android:textSize="20dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/singleView_repeatDays"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/singleView_dailyCompletions"
+        android:text="to do"
+        android:textSize="20dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/singleView_repeatDays"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/singleView_dailyCompletionsTitle"/>
+
+    <TextView
+        android:id="@+id/singleView_totalCompletionsTitle"
+        android:text="@string/total_completions"
+        android:textSize="20dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/singleView_dailyCompletionsTitle"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/singleView_totalCompletions"
+        android:text="to do"
+        android:textSize="20dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/singleView_dailyCompletionsTitle"
+        android:layout_toRightOf="@+id/singleView_totalCompletionsTitle"/>
+
     <ImageButton
         android:id="@+id/btn_deleteHabit"
         android:src="@drawable/btn_trash"

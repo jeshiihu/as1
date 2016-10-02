@@ -1,7 +1,9 @@
 package com.huynh.jess.jhuynh_habittracker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Jess on 2016-09-28.
@@ -70,6 +72,34 @@ public class HabitList {
     public void removeAll()
     {
         list.clear();
+    }
+
+    public CompletedHabitList getHabitCompletions()
+    {
+        CompletedHabitList completedList = new CompletedHabitList();
+
+        for(Habit h : list)
+        {
+            for(CompletedHabit ch : h.getCompletedHabits().getList())
+                completedList.addCompletedHabit(ch);
+        }
+
+        return completedList;
+    }
+
+    public HabitList getTodaysHabits()
+    {
+        SimpleDateFormat format = new SimpleDateFormat("EEEE");
+        String currentDay = format.format(new Date(System.currentTimeMillis()));
+
+        HabitList todayList = new HabitList();
+        for(Habit h : list)
+        {
+            if(h.getDays().isDayContained(currentDay))
+                todayList.addHabit(h);
+        }
+
+        return todayList;
     }
 
     private ArrayList<Listener> getListeners() {

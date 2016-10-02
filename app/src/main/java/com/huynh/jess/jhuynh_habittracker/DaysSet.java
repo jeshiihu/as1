@@ -78,6 +78,21 @@ public class DaysSet implements Serializable
         return !days.isEmpty() && days.contains(day);
     }
 
+    public Boolean isDayContained(String day)
+    {
+        try
+        {
+            Day dayEnum = Day.valueOf(day);
+            return !days.isEmpty() && days.contains(dayEnum);
+        }
+        catch(Exception e)
+        {
+            throw new IllegalArgumentException();
+        }
+
+    }
+
+
     public int size()
     {
         return days.size();

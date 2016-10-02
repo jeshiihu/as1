@@ -1,5 +1,6 @@
 package com.huynh.jess.jhuynh_habittracker;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,36 +10,34 @@ import java.util.Map;
  * Created by Jess on 2016-09-26.
  */
 
-// Complete habit has 1 habit obj
-public class CompletedHabit
+public class CompletedHabit implements Serializable
 {
-    private Habit containedHabit;
-    private Date  completeDate = new Date();
-    private Boolean completed = Boolean.FALSE;
+    String habitTitle;
+    String dateHabitWasCreated;
+    private Date  completeDate;
 
-    public CompletedHabit(Habit habit)
-    {
-        containedHabit = habit;
-    }
-
-    public Habit getHabit()
-    {
-        return containedHabit;
-    }
-
-    public void setHabit(Habit habit)
-    {
-        containedHabit = habit;
-    }
-
-    public void complete()
+    public CompletedHabit(String title, String createdDate)
     {
         completeDate = new Date(System.currentTimeMillis());
-        completed = Boolean.TRUE;
+        habitTitle = title;
+        dateHabitWasCreated = createdDate;
     }
 
-    public Boolean isCompleted()
+    @Override
+    public String toString()
     {
-        return completed;
+        return habitTitle + "\nCompleted on:" + getCompletionDateTime();
+    }
+
+    public String getCompletionDate()
+    {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(completeDate);
+    }
+
+    public String getCompletionDateTime()
+    {
+        SimpleDateFormat format = new SimpleDateFormat("EEE yyyy-MM-dd, hh:mm::ss");
+        return format.format(completeDate);
     }
 }

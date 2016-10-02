@@ -7,7 +7,8 @@
     <string name="hint_habit_title">enter habit title here</string>
 
     <string name="creation_date">Creation Date:</string>
-    <string name="hyphen">-</string>
+    <string name="daily_completions">Daily Completions:</string>
+    <string name="total_completions">Total Completions:</string>
 
     <string name="repeat_days">Repeat on Days:</string>
     <string name="add">Add</string>
@@ -24,14 +25,9 @@
     <string name="view_history">View History</string>
 
     <string-array name="spinner_views">
+        <item>- Select View -</item>
+        <item>Today\'s Habits</item>
+        <item>History</item>
         <item>All Habits</item>
-        <item>All History</item>
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
-        <item>Sunday</item>
     </string-array>
 </resources>

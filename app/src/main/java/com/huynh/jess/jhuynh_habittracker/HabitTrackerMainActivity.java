@@ -29,20 +29,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-public class HabitTrackerMainActivity extends AppCompatActivity {
-
-    public final static int REQ_CODE_CREATOR = 1;
-    public final static int REQ_CODE_EDITOR = 2;
-
-    private static final String FILENAME = "file.sav";
-    private HabitListController habitCtrl = new HabitListController();
-
-//    private ListView oldHabitList;
-//    private ArrayList<Habit> habitList = new ArrayList<Habit>();
-//    private ArrayAdapter<Habit> adapter;
-
-
-    private int   selectedIndex;
+public class HabitTrackerMainActivity extends AppCompatActivity
+{
+    private ListView listView;
+    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,47 +40,22 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_tracker_main);
 
-        ListView listview = (ListView)findViewById(R.id.habitListView);
-        final ArrayList<Habit> list;
-        if(habitCtrl.getHabitList() != null)
-        {
-            Collection<Habit> habits = habitCtrl.getHabitList().getHabits();
-            list = new ArrayList<Habit>(habits);
-        }
-        else{
-            habitCtrl.clearHabits();
-            list = new ArrayList<Habit>();
-        }
+        listView = (ListView)findViewById(R.id.habitListView);
 
-        final ArrayAdapter<Habit> habitAdapter = new ArrayAdapter<Habit>(this, R.layout.list_item, list);
-        listview.setAdapter(habitAdapter);
-
-        habitCtrl.getHabitList().addListener(new Listener() {
-            @Override
-            public void update() {
-                list.clear();
-                Collection<Habit> students = habitCtrl.getHabitList().getHabits();
-                list.addAll(students);
-                habitAdapter.notifyDataSetChanged();
-                saveInFile();
-            }
-        });
-
-        TextView textCurrentDay = (TextView)findViewById(R.id.textView_mainTitle);
-        Date dayOfWeek = new Date(System.currentTimeMillis());
+        title = (TextView)findViewById(R.id.textView_mainTitle);
         SimpleDateFormat format = new SimpleDateFormat("EEEE");
-        textCurrentDay.setText(format.format(dayOfWeek));
+        title.setText(format.format(new Date(System.currentTimeMillis())));
 
         ImageButton addButton = (ImageButton)findViewById(R.id.btn_addHabit);
-        listview = (ListView)findViewById(R.id.habitListView);
-
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedIndex = i;
-                Intent editIntent = new Intent(HabitTrackerMainActivity.this , HabitTrackerSingleActivity.class);
-                editIntent.putExtra("habit", habitCtrl.getHabitList().getHabit(i));
-                startActivityForResult(editIntent, REQ_CODE_EDITOR);
+                if(!title.equals("History"))
+                {
+                    Intent singleIntent = new Intent(HabitTrackerMainActivity.this, HabitTrackerSingleActivity.class);
+                    singleIntent.putExtra("index", i);
+                    startActivity(singleIntent);
+                }
             }
         });
 
@@ -98,86 +63,60 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapterSpinner = ArrayAdapter.createFromResource(this, R.array.spinner_views, android.R.layout.simple_spinner_item);
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapterSpinner);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getSelectedItem().toString();
+                updateView(item);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
-    protected void onStart()
+    protected void onResume()
     {
-        super.onStart();
-        loadFromFile();
+        super.onResume();
+        HabitListController.loadFromFile(this);
+        Collection<Habit> list = HabitListController.getHabitList(this).getTodaysHabits().getHabits();
+        ArrayAdapter<Habit>adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, new ArrayList<Habit>(list));
+        listView.setAdapter(adapter);
     }
 
-    private void loadFromFile()
+    protected void updateView(String view)
     {
-//        try
-//        {
-//            FileInputStream fis = openFileInput(FILENAME);
-//            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-//
-//            Gson gson = new Gson();
-//            // code taken from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt Sept.22, 2016
-//            Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
-//            HabitList loadedList = new HabitList((ArrayList<Habit>) gson.fromJson(in, listType));
-//            habitCtrl.clearHabits();
-//            habitCtrl.addMultipleHabits(loadedList);
-//        }
-//        catch (FileNotFoundException e)
-//        {
-//            habitCtrl.clearHabits();
-//        }
-//        catch (IOException e)
-//        {
-//            throw new RuntimeException();
-//        }
-    }
-
-    private void saveInFile() {
-        try
+        if(view.equals("Today's Habits"))
         {
-            FileOutputStream fos = openFileOutput(FILENAME, 0); // 0 is overriding rather than appending
-            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            SimpleDateFormat format = new SimpleDateFormat("EEEE");
+            title.setText(format.format(new Date(System.currentTimeMillis())));
 
-            Gson gson = new Gson();
-            gson.toJson(habitCtrl.getHabitList().getHabits(), writer);
-
-            writer.flush();
+            Collection<Habit> list = HabitListController.getHabitList(this).getTodaysHabits().getHabits();
+            ArrayAdapter<Habit>adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, new ArrayList<Habit>(list));
+            listView.setAdapter(adapter);
         }
-        catch (FileNotFoundException e)
+        else
+        if(view.equals("All Habits"))
         {
-            throw new RuntimeException();
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException();
-        }
-    }
+            title.setText(view);
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if(requestCode == REQ_CODE_CREATOR)
-        {
-            if(resultCode == RESULT_OK)
-            {
-                Habit newHabit = (Habit) data.getExtras().getSerializable("newHabit");
-                habitCtrl.addHabit(newHabit);
-            }
-            else if(resultCode == RESULT_CANCELED)
-            {
-                // do nothing
-            }
+            Collection<Habit> list = HabitListController.getHabitList(this).getHabits();
+            ArrayAdapter<Habit> adapter = new ArrayAdapter<Habit>(this, R.layout.list_item, new ArrayList<Habit>(list));
+            listView.setAdapter(adapter);
         }
-
-        if(requestCode == REQ_CODE_EDITOR)
+        else
+        if(view.equals("History"))
         {
-            if(resultCode == RESULT_OK)
-            {
-                String action = data.getExtras().getString("actionType");
-                if(action.equals("delete"))
-                {
-                    habitCtrl.getHabitList().removeHabit(selectedIndex);
-                }
-            }
+            title.setText(view);
+
+            Collection<CompletedHabit> list = HabitListController.getHabitList(this).getHabitCompletions().getList();
+            ArrayAdapter<CompletedHabit> completedAdapter = new ArrayAdapter<CompletedHabit>(this, R.layout.list_item, new ArrayList<CompletedHabit>(list));
+            listView.setAdapter(completedAdapter);
         }
     }
 
@@ -187,6 +126,6 @@ public class HabitTrackerMainActivity extends AppCompatActivity {
 
         //start new activity to create the habit
         Intent intentCreator = new Intent(HabitTrackerMainActivity.this , HabitTrackerCreatorActivity.class);
-        startActivityForResult(intentCreator, REQ_CODE_CREATOR);
+        startActivity(intentCreator);
     }
 }
